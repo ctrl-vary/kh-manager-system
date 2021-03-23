@@ -63,6 +63,56 @@ public class MemberControler {
         return "member-edit";
     }
 
+    //访问 添加用户列表页面的页面
+    @RequestMapping("/member-add")
+    public String memberadd(UserInfo user, ModelMap m){
+
+        //根据userId查询
+        UserInfo u=userInfoService.selectByUserId(user);
+
+        //把数据传到前端
+        m.addAttribute("user",u);
+        return "member-add";
+    }
+
+
+    //访问 密码修改的页面
+    @RequestMapping("/member-password")
+    public String memberpassword(UserInfo user, ModelMap m){
+
+        //根据userId查询
+        UserInfo u=userInfoService.selectByUserId(user);
+
+        //把数据传到前端
+        m.addAttribute("user",u);
+        return "member-password";
+    }
+
+    //访问 删除用户的页面
+    @RequestMapping("/member-del")
+    public String memberdel(UserInfo user, ModelMap m){
+
+        //根据userId查询
+        UserInfo u=userInfoService.selectByUserId(user);
+
+        //把数据传到前端
+        m.addAttribute("user",u);
+        return "member-del";
+    }
+
+    //访问 统计报表的页面
+    @RequestMapping("/tj-echart")
+    public String memberechart(UserInfo user, ModelMap m){
+
+        //根据userId查询
+        UserInfo u=userInfoService.selectByUserId(user);
+
+        //把数据传到前端
+        m.addAttribute("user",u);
+        return "tj-echart";
+    }
+
+
 
 
 }
