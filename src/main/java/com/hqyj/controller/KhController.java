@@ -21,7 +21,16 @@ public class KhController {
     public String cateadd(){
         return "cate-add";
     }
-
+    //访问 添加联系人列表页面页面
+    @RequestMapping("/contact-add")
+    public String contactdd(){
+        return "contact-add";
+    }
+    //访问 添加客户服务列表页面页面
+    @RequestMapping("/banner-add")
+    public String banneradd(){
+        return "banner-add";
+    }
    
 
     //访问 编辑客户列表页面页面

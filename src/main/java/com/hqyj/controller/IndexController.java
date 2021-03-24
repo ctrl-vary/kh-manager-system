@@ -37,6 +37,21 @@ public class IndexController {
 
         return "index";
     }
+    //访问 联系人列表页面
+    @RequestMapping("/contact-list")
+    public String contact(){
+        return "/contact-list";
+    }
+    //访问 服务记录列表页面
+    @RequestMapping("/banner-list")
+    public String banner(){
+        return "/banner-list";
+    }
+    //访问 统计报表页面
+    @RequestMapping("/contact-bb")
+    public String bbmb(){
+        return "/contact-bb";
+    }
 
 
 
