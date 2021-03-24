@@ -49,5 +49,25 @@ public class AdminController {
         return "role-add";
     }
 
+    @RequestMapping("/rule-edit")
+    public String ruleedit(){
+        return "rule-edit";
+    }
+
+    @RequestMapping("/rule-add")
+    public String ruleadd(){
+        return "rule-add";
+    }
+
+    @RequestMapping("/sys-log")
+    public String syslog(){
+        return "sys-log";
+    }
+
+    @RequestMapping("/sys-set")
+    public String sysset(){
+        return "sys-set";
+    }
+
 
 }

@@ -1,6 +1,5 @@
 $(function () {
     echart_1();
-    echart_2();
 
     echart_3();
     echart_4();
@@ -8,19 +7,27 @@ $(function () {
     echart_map();
     echart_5();
 
-    //echart_1湖南货物收入
+    //echart_1
     function echart_1() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('chart_1'));
         option = {
             tooltip: {
                 trigger: 'item',
-                formatter: "{a} <br/>{b} : {c}万元"
+                formatter: "{a} <br/>{b} : {c}位"
             },
             legend: {
                 x: 'center',
                 y: '15%',
-                data: [ '张家口', '承德', '衡水','邢台', '邯郸', '保定','秦皇岛','石家庄', '唐山'],
+                data: [ '福州',
+            '长春',
+            '重庆',
+            '西安',
+            '成都',
+            '常州',
+            '北京',
+            '北海',
+            '海口'],
                 icon: 'circle',
                 textStyle: {
                     color: '#fff',
@@ -45,7 +52,7 @@ $(function () {
                 label: {
                     normal: {
                         show: true,
-                        formatter: '{c}万元'
+                        formatter: '{c}位'
                     },
                     emphasis: {
                         show: true
@@ -61,8 +68,8 @@ $(function () {
                     }
                 },
                 data: [{
-                        value: 900.58,
-                        name: '张家口',
+                        value: 29,
+                        name: '福州',
                         itemStyle: {
                             normal: {
                                 color: '#f845f1'
@@ -70,8 +77,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1100.58,
-                        name: '承德',
+                        value: 31,
+                        name: '长春',
                         itemStyle: {
                             normal: {
                                 color: '#ad46f3'
@@ -79,8 +86,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1200.58,
-                        name: '衡水',
+                        value: 27,
+                        name: '重庆',
                         itemStyle: {
                             normal: {
                                 color: '#5045f6'
@@ -88,8 +95,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1300.58,
-                        name: '邢台',
+                        value: 13,
+                        name: '西安',
                         itemStyle: {
                             normal: {
                                 color: '#4777f5'
@@ -97,8 +104,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1400.58,
-                        name: '邯郸',
+                        value: 37,
+                        name: '成都',
                         itemStyle: {
                             normal: {
                                 color: '#44aff0'
@@ -106,8 +113,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1500.58,
-                        name: '保定',
+                        value: 15,
+                        name: '常州',
                         itemStyle: {
                             normal: {
                                 color: '#45dbf7'
@@ -115,8 +122,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1500.58,
-                        name: '秦皇岛',
+                        value: 32,
+                        name: '北京',
                         itemStyle: {
                             normal: {
                                 color: '#f6d54a'
@@ -124,8 +131,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1600.58,
-                        name: '石家庄',
+                        value: 31,
+                        name: '北海',
                         itemStyle: {
                             normal: {
                                 color: '#f69846'
@@ -133,8 +140,8 @@ $(function () {
                         }
                     },
                     {
-                        value: 1800,
-                        name: '唐山',
+                        value: 18,
+                        name: '海口',
                         itemStyle: {
                             normal: {
                                 color: '#ff4343'
@@ -142,7 +149,7 @@ $(function () {
                         }
                     },
                     {
-                        value: 0,
+                        value: 29,
                         name: "",
                         itemStyle: {
                             normal: {
@@ -157,7 +164,7 @@ $(function () {
                         }
                     },
                     {
-                        value: 0,
+                        value: 42,
                         name: "",
                         itemStyle: {
                             normal: {
@@ -172,7 +179,7 @@ $(function () {
                         }
                     },
                     {
-                        value: 0,
+                        value: 2,
                         name: "",
                         itemStyle: {
                             normal: {
@@ -286,105 +293,6 @@ $(function () {
         });
     }
 
-    //echart_2湖南省地图
-    function echart_2() {
-           // 基于准备好的dom，初始化echarts实例
-           var myChart = echarts.init(document.getElementById('chart_2'));
-           function showProvince() {
-                   myChart.setOption(option = {
-                       // backgroundColor: '#ffffff',
-                       visualMap: {
-                           show: false,
-                           min: 0,
-                           max: 100,
-                           left: 'left',
-                           top: 'bottom',
-                           text: ['高', '低'], // 文本，默认为数值文本
-                           calculable: true,
-                           inRange: {
-                               color: ['yellow', 'lightskyblue', 'orangered']
-                           }
-                       },
-                       series: [{
-                           type: 'map',
-                           mapType: 'hunan',
-                           roam: true,
-                           label: {
-                               normal: {
-                                   show: true
-                               },
-                               emphasis: {
-                                   textStyle: {
-                                       color: '#fff'
-                                   }
-                               }
-                           },
-                           itemStyle: {
-                               normal: {
-                                   borderColor: '#389BB7',
-                                   areaColor: '#fff',
-                               },
-                               emphasis: {
-                                   areaColor: '#389BB7',
-                                   borderWidth: 0
-                               }
-                           },
-                           animation: false,
-                           data: [{
-                               name: '长沙市',
-                               value:  100
-                           }, {
-                               name: '株洲市',
-                               value: 96
-                           }, {
-                               name: '湘潭市',
-                               value: 98
-                           }, {
-                               name: '衡阳市',
-                               value: 80
-                           }, {
-                               name: '邵阳市',
-                               value: 88
-                           }, {
-                               name: '岳阳市',
-                               value: 79
-                           }, {
-                               name: '常德市',
-                               value: 77,
-                           }, {
-                               name: '张家界市',
-                               value: 33
-                           }, {
-                               name: '益阳市',
-                               value: 69,
-                           }, {
-                               name: '郴州市',
-                               value: 66
-                           }, {
-                               name: '永州市',
-                               value: 22
-                           },{
-                                name: '娄底市',
-                                value: 51
-                           },{
-                                name: '湘西土家族苗族自治州',
-                                value: 44
-                           },{
-                                name: '怀化市',
-                                value: 9
-                           }]
-                       }]
-                   });
-           }
-   
-           var currentIdx = 0;
-           showProvince();
-           // 使用刚指定的配置项和数据显示图表。
-           window.addEventListener("resize", function () {
-               myChart.resize();
-           });
-    }
-
     // echart_map中国地图
     function echart_map() {
         // 基于准备好的dom，初始化echarts实例
@@ -415,7 +323,8 @@ $(function () {
 
         var GZData = [
             [{
-                name: '长沙'
+                name: '长沙',
+
             }, {
                 name: '福州',
                 value: 95
@@ -439,7 +348,8 @@ $(function () {
                 value: 60
             }],
             [{
-                name: '长沙'
+                name: '长沙',
+
             }, {
                 name: '成都',
                 value: 50
@@ -502,7 +412,7 @@ $(function () {
         var color = ['#c5f80e'];
         var series = [];
         [
-            ['石家庄', GZData]
+            ['公司收入（万元）', GZData]
         ].forEach(function (item, i) {
             series.push({
                 name: item[0],
@@ -542,6 +452,7 @@ $(function () {
                     }
                 },
                 symbolSize: function (val) {
+                    console.log(val[2] / 8);
                     return val[2] / 8;
                 },
                 itemStyle: {
@@ -611,7 +522,7 @@ $(function () {
 
     }
 
-    //echart_3货物周转量
+    //echart_3各部门客户量
     function echart_3() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('chart_3'));
@@ -624,7 +535,7 @@ $(function () {
                 trigger: 'axis'
             },
             legend: {
-                data:['铁路货物','国家铁路货物','地方铁路货物','合资铁路货物','公路货物','水运货物'],
+                data:['销售部','海外部','商务部','市场部'],
                 textStyle:{
                     color: '#fff'
                 },
@@ -641,7 +552,7 @@ $(function () {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['2012年','2013年','2014年','2015年','2016年'],
+                data: ['2017年','2018年','2019年','2020年','2021年'],
                 splitLine: {
                     show: false
                 },
@@ -652,7 +563,7 @@ $(function () {
                 }
             },
             yAxis: {
-                name: '亿吨公里',
+                name: '位',
                 type: 'value',
                 splitLine: {
                     show: false
@@ -665,40 +576,29 @@ $(function () {
             },
             series: [
                 {
-                    name:'铁路货物',
+                    name:'销售部',
                     type:'line',
-                    data:[3961.88, 4233.63, 4183.14, 3633.01, 3704.47]
+                    data:[39, 42, 41, 36, 37]
                 },
                 {
-                    name:'国家铁路货物',
+                    name:'海外部',
                     type:'line',
-                    data:[3374.76, 3364.76, 3274.76, 3371.82, 3259.87]
+                    data:[33, 33, 32, 33, 32]
                 },
                 {
-                    name:'地方铁路货物',
+                    name:'商务部',
                     type:'line',
-                    data:[14.77, 15.17, 13.17, 14.56, 15.84]
+                    data:[14, 15, 13, 14, 15]
                 },
                 {
-                    name:'合资铁路货物',
+                    name:'市场部',
                     type:'line',
-                    data:[686.17,847.26,895.22,865.28,886.72]
-                },
-                {
-                    name:'公路货物',
-                    type:'line',
-                    data:[6133.47, 6577.89, 7019.56,6821.48,7294.59]
-                },
-                {
-                    name:'水运货物',
-                    type:'line',
-                    data:[509.60, 862.54, 1481.77,1552.79,1333.62]
-                }
-            ]
+                    data:[68,84,89,86,88]
+                }]
         };
         myChart.setOption(option);
     }
-    //湖南高速公路
+    //省内合作线
     function echart_4() {
           // 基于准备好的dom，初始化echarts实例
           var myChart = echarts.init(document.getElementById('chart_4'));

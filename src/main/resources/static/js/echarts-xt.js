@@ -14,11 +14,10 @@ $(function () {
         var myChart = echarts.init(document.getElementById('echarts_1'));
 
         var data = [
-            {value: 12,name: '行业一'},
-            {value: 13,name: '行业二'},
-            {value: 70,name: '行业三'},
-            {value: 52,name: '行业四'},
-            {value: 35,name: '行业五'}
+            {value: 50,name: 'database'},
+            {value: 12,name: 'ridis'}
+
+
         ];
 
         option = {
@@ -36,7 +35,7 @@ $(function () {
                 itemWidth: 10,
                 itemHeight: 10,
                 icon: 'rect',
-                data: ['行业一', '行业二', '行业三', '行业四', '行业五'],
+                data: ['database', 'ridis'],
                 textStyle: {
                     color: [],
                     fontStyle: 'normal',
@@ -45,7 +44,7 @@ $(function () {
                 }
             },
             series: [{
-                name: '行业占比',
+                name: '储存占比',
                 type: 'pie',
                 clockwise: false, //饼图的扇区是否是顺时针排布
                 minAngle: 20, //最小的扇区角度（0 ~ 360）
@@ -105,6 +104,8 @@ $(function () {
             myChart.resize();
         });
     }
+
+
     function echarts_2() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts_2'));
@@ -113,12 +114,12 @@ $(function () {
             backgroundColor: 'rgba(0,0,0,0)',
             tooltip: {
                 trigger: 'item',
-                formatter: "{b}  <br/>{c}辆"
+                formatter: "{b}  <br/>{c}人"
             },
             legend: {
                 x: 'center',
                 y: '2%',
-                data: ['车型一', '车型二', '车型三', '车型四', '车型五'],
+                data: ['客户管理员', '客户经理','系统管理员'],
                 icon: 'circle',
                 textStyle: {
                     color: '#fff',
@@ -126,7 +127,7 @@ $(function () {
             },
             calculable: true,
             series: [{
-                name: '车型',
+                name: '总储存',
                 type: 'pie',
                 //起始角度，支持范围[0, 360]
                 startAngle: 0,
@@ -143,7 +144,7 @@ $(function () {
                 label: {
                     normal: {
                         show: true,
-                        formatter: '{c}辆'
+                        formatter: '{c}%'
                     },
                     emphasis: {
                         show: true
@@ -159,8 +160,8 @@ $(function () {
                     }
                 },
                 data: [{
-                    value: 600,
-                    name: '车型一',
+                    value: 10584,
+                    name: '客户经理',
                     itemStyle: {
                         normal: {
                             color: '#f845f1'
@@ -168,8 +169,8 @@ $(function () {
                     }
                 },
                     {
-                        value: 1100,
-                        name: '车型二',
+                        value: 1865,
+                        name: '客户管理员',
                         itemStyle: {
                             normal: {
                                 color: '#ad46f3'
@@ -177,29 +178,11 @@ $(function () {
                         }
                     },
                     {
-                        value: 1200,
-                        name: '车型三',
+                        value: 8,
+                        name: '系统管理员',
                         itemStyle: {
                             normal: {
                                 color: '#5045f6'
-                            }
-                        }
-                    },
-                    {
-                        value: 1300,
-                        name: '车型四',
-                        itemStyle: {
-                            normal: {
-                                color: '#4777f5'
-                            }
-                        }
-                    },
-                    {
-                        value: 1400,
-                        name: '车型五',
-                        itemStyle: {
-                            normal: {
-                                color: '#44aff0'
                             }
                         }
                     },
@@ -233,27 +216,8 @@ $(function () {
                         labelLine: {
                             show: false
                         }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
                     }
+
                 ]
             }]
         };
@@ -264,6 +228,7 @@ $(function () {
             myChart.resize();
         });
     }
+
     function map() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('map'));
@@ -292,21 +257,18 @@ $(function () {
             toolTipData.push({
                 name: name,
                 value: [{
-                    name: "车型一",
-                    value: Math.round(Math.random() * 100 + 10) + '辆'
+                    name: "客户经理",
+                    value: Math.round(Math.random() * 100 + 10) + '人'
                 },
                     {
-                        name: "车型二",
-                        value: Math.round(Math.random() * 100 + 10)+ '辆'
-                    },
-                    {
-                        name: "车型三",
-                        value: Math.round(Math.random() * 100 + 10)+ '辆'
-                    },
-                    {
-                        name: "车型四",
-                        value: Math.round(Math.random() * 100 + 10)+ '辆'
+                        name: "客户管理员",
+                        value: Math.round(Math.random() * 10)+ '人'
                     }
+                    // {
+                    //     name: "系统管理员",
+                    //     value: Math.round(Math.random())+ '人'
+                    // }
+
                 ]
             })
         });
@@ -682,7 +644,7 @@ $(function () {
                     itemStyle: {
                         normal: {areaStyle: {type: 'default'}}
                     },
-                    data:[710, 312, 321,754, 500, 830, 710, 521, 504, 660, 530, 410,710, 312, 321,754, 500, 830, 710, 521, 504, 660, 530, 410]
+                    data:[102, 78, 79,56, 23, 67, 89, 289, 689, 783, 763, 610,482, 321, 156,465, 489, 513, 325, 241, 124, 231, 111, 231]
                 }
             ]
         };
@@ -769,7 +731,7 @@ $(function () {
                 // extraCssText: 'box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);', //添加阴影
                 formatter: function(params) {
                     if (params.seriesName != "") {
-                        return params.name + ' ：  ' + params.value + ' 辆';
+                        return params.name + ' ：  ' + params.value + 'GB';
                     }
                 },
 
@@ -978,7 +940,7 @@ $(function () {
                     type: 'none'
                 },
                 formatter: function(params) {
-                    return params[0]["data"].name + "<br/>" + '报警次数: ' + params[1]["data"].value+'次' ;
+                    return params[0]["data"].name + "<br/>" + '使用时长: ' + params[1]["data"].value+'h' ;
                 }
             },
             xAxis: [{
