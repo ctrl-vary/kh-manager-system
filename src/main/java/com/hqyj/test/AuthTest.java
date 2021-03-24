@@ -44,4 +44,8 @@ public class AuthTest {
         role.setName("客户经理1");
         authDao.updateRole(role);
     }
+    @Test
+    public void test5(){
+        System.out.println(authDao.getRoleByP(1).toString());
+    }
 }

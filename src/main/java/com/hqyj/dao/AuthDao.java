@@ -36,4 +36,17 @@ public interface AuthDao {
     List<Permission> getPermissions();
     @Update("UPDATE permission set name=#{name}")
     void updatePermission(Permission p);
+    //根据权限查找所属角色
+    @Select("SELECT role.id as id,role.name as name " +
+            "FROM role WHERE" +
+            " role.id in(SELECT role_id FROM role_permission WHERE p_id=#{pId})")
+    List<Role> getRoleByP(Integer pId);
+    @Delete("DELETE FROM permission WHERE id=#{pId}")
+    void deletePermission(Integer pId);
+    @Delete("DELETE FROM role WHERE id=#{roleId}")
+    void deleteRole(Integer roleId);
+    @Delete("DELETE FROM role_permission WHERE role_id=#{roleId}")
+    void deleteRolePermissionByRole(Integer roleId);
+    @Delete("DELETE FROM role_permission WHERE permission_id=#{pId}")
+    void deleteRolePermissionByPermission(Integer pId);
 }

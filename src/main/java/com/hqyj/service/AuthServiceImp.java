@@ -77,4 +77,32 @@ public class AuthServiceImp implements AuthService{
         authDao.updatePermission(p);
     }
 
+    @Override
+    public String getPermissionInfo(int pId) {
+        List<Role> roleList=authDao.getRoleByP(pId);
+        if(roleList.size()<=0){return  null;}
+        Role r=roleList.get(0);
+        StringBuilder s=new StringBuilder(r.getName());
+        for (int i=1;i<roleList.size();i++){
+            Role role=roleList.get(i);
+            s.append(","+role.getName());
+        }
+        return s.toString();
+    }
+
+    @Override
+    public void deletePermission(Integer pId) {
+        authDao.deletePermission(pId);
+        authDao.deleteRolePermissionByPermission(pId);
+    }
+    @Override
+    public List<Role> getRoleByP(Integer pId) {
+        return authDao.getRoleByP(pId);
+    }
+    @Override
+    public void deleteRole(Integer roleId) {
+        authDao.deleteRole(roleId);
+        authDao.deleteRolePermissionByRole(roleId);
+    }
+
 }

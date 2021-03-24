@@ -1,6 +1,7 @@
 package com.hqyj.controller;
 
 import com.hqyj.pojo.Auth;
+import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
 import com.hqyj.service.AuthService;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,55 @@ public class AuthController {
 
     }
 
+    /**
+     * 获取权限展示信息
+     */
+    @GetMapping("/getPermissionInfo")
+    public void getPermissionInfo(){
+        List<Permission> permissionList=authService.getPermissions();
+        int size=permissionList.size();
+        for (Permission p: permissionList) {
+            p.setBrRole(authService.getPermissionInfo(p.getId()));
+        }
+    }
+
+    /**
+     * 修改权限信息
+     * @param p
+     * @param ids
+     */
+    @GetMapping("/updatePermission")
+    public void updatePermission(Permission p,List<Integer> ids){
+        authService.updatePermission(p);
+        if(ids.size()>0){
+       List<Role> roleList=authService.getRoleByP(p.getId());
+       Set<Integer> oldRoleId=new HashSet<>();
+       List<Integer> delId=new ArrayList<>();
+        for (Role r: roleList) { oldRoleId.add(r.getId()); }
+            for (Integer id: ids) {
+                if(!oldRoleId.contains(id)){delId.add(id);}
+            }
+        }
+
+    }
+
+    /**
+     * 删除权限
+     * @param pId
+     */
+    @GetMapping("/deletePermission")
+    public void deletePermission(Integer pId){
+        authService.deletePermission(pId);
+    }
+
+    /**
+     * 删除角色
+     * @param roleId
+     */
+    @GetMapping("/deleteRole")
+    public void deleteRole(Integer roleId){
+        authService.deleteRole(roleId);
+    }
     /**
      * 获取到需要取消与角色关系的权限
      * @param authList

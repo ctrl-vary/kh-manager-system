@@ -18,4 +18,8 @@ public interface AuthService {
     void deleteRoleAuth(Integer roleId,Integer pId);
     List<Permission> getPermissions();
     void updatePermission(Permission p);
+    String getPermissionInfo(int pId);
+    void deletePermission(Integer pId);
+    List<Role> getRoleByP(Integer pId);
+    void deleteRole(Integer roleId);
 }

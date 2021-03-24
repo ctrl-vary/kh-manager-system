@@ -9,6 +9,15 @@ package com.hqyj.pojo;
 public class Permission {
     private Integer id;
     private String name;
+    private String brRole;
+
+    public String getBrRole() {
+        return brRole;
+    }
+
+    public void setBrRole(String brRole) {
+        this.brRole = brRole;
+    }
 
     public Integer getId() {
         return id;
@@ -31,6 +40,7 @@ public class Permission {
         return "Permission{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", brRole='" + brRole + '\'' +
                 '}';
     }
 }
