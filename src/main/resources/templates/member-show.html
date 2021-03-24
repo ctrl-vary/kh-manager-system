@@ -20,7 +20,7 @@
             <blockquote class="layui-elem-quote">
                 <img th:src="${session.user.url}" class="layui-circle" style="width:50px;float:left">
                 <dl style="margin-left:80px; color:#019688">
-                <dt><span th:text="${session.user.userName}">谢珊</span> <span >登录次数：76</span></dt>
+                <dt><span th:text="${session.user.userName}">xs</span> <span >登录次数：76</span></dt>
                 <dd style="margin-left:0">你要悄悄努力，然后惊艳所有人！</dd>
               </dl>
             </blockquote>
@@ -57,7 +57,7 @@
         <script>
             layui.use(['form','layer'], function(){
                 $ = layui.jquery;
-              var form = layui.form()
+              var form = layui.form
               ,layer = layui.layer;
             
               //自定义验证规则
@@ -79,7 +79,7 @@
               //监听提交
               form.on('submit(add)', function(data){
                 console.log(data);
-                //发异步，把数据提交给php
+
                 layer.alert("增加成功", {icon: 6},function () {
                     // 获得frame索引
                     var index = parent.layer.getFrameIndex(window.name);

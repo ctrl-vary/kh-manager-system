@@ -48,14 +48,14 @@
         <li class="layui-nav-item"><img th:src="${session.user.url}" id="head1" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt="">
           <dl class="layui-nav-child">
             <!-- 二级菜单 -->
-            <dd><a href="javascript:;" onclick="member_show('修改头像','./updateHead','10001','360','400')">修改头像</a></dd>
+            <dd><a href="javascript:;" onclick="member_show('修改头像','./updateHead','360','400')">修改头像</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item"> <a href="javascript:;" th:text="${session.user.userName}">admin</a>
           <dl class="layui-nav-child">
             <!-- 二级菜单 -->
-            <dd><a href="javascript:;" onclick="member_show('个人资料查看','./member-show','10001','360','400')">个人资料</a></dd>
-            <dd><a href="javascript:;" onclick="member_show('修改密码','./edit-password','10001','360','360')">修改密码</a></dd>
+            <dd><a href="javascript:;" onclick="member_show('个人资料查看','./member-show','360','400')">个人资料</a></dd>
+            <dd><a href="javascript:;" onclick="member_show('修改密码','./edit-password','360','360')">修改密码</a></dd>
             <dd><a href="javascript:;" onclick="logout()">退出</a></dd>
           </dl>
         </li>
@@ -104,7 +104,7 @@
 
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon iconfont" style="top: 3px;">&#xe621;</i><cite>客户归类统计</cite> </a>
           <dl class="layui-nav-child">
-            <dd class=""> <a href="javascript:;" _href="./regionTj"> <cite>地区统计</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./regionTj"> <cite>数据统计</cite> </a> </dd>
           </dl>
         </li>
 
@@ -130,28 +130,27 @@
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon iconfont" style="top: 3px;">&#xe625;</i><cite>用户管理</cite> </a>
           <dl class="layui-nav-child">
             <dd class=""> <a href="javascript:;" _href="./member-list"> <cite>用户列表</cite> </a> </dd>
-            <dd class=""> <a href="javascript:;" _href="./member-del.html"> <cite>删除用户</cite> </a> </dd>
-            <dd class=""> <a href="javascript:;" _href="./member-del.html"> <cite>访问记录</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./member-del"> <cite>删除用户</cite> </a> </dd>
+<!--            <dd class=""> <a href="javascript:;" _href="./member-log"> <cite>访问记录</cite> </a> </dd>-->
           </dl>
         </li>
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon" style="top: 3px;">&#xe613;</i><cite>管理员管理</cite> </a>
           <dl class="layui-nav-child">
             <dd class=""> <a href="javascript:;" _href="./admin-list"> <cite>管理员列表</cite> </a> </dd>
             <dd class=""> <a href="javascript:;" _href="./admin-role"> <cite>角色管理</cite> </a> </dd>
-            <dd class=""> <a href="javascript:;" _href="./admin-cate"> <cite>权限分类</cite> </a> </dd>
             <dd class=""> <a href="javascript:;" _href="./admin-rule"> <cite>权限管理</cite> </a> </dd>
           </dl>
         </li>
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon" style="top: 3px;">&#xe629;</i><cite>系统统计</cite> </a>
           <dl class="layui-nav-child">
-            <dd class=""> <a href="javascript:;" _href="./echart.html"> <cite>统计报表</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./tj-echart"> <cite>统计报表</cite> </a> </dd>
           </dl>
         </li>
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon" style="top: 3px;">&#xe614;</i><cite>系统设置</cite> </a>
           <dl class="layui-nav-child">
-            <dd class=""> <a href="javascript:;" _href="./sys-set.html"> <cite>系统设置</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./sys-set"> <cite>系统设置</cite> </a> </dd>
             <dd class=""> <a href="javascript:;" _href="./sys-data.html"> <cite>系统公告</cite> </a> </dd>
-            <dd class=""> <a href="javascript:;" _href="./sys-log.html"> <cite>系统日志</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./sys-log"> <cite>系统日志</cite> </a> </dd>
             <dd class=""> <a href="javascript:;" _href="./sys-link.html"> <cite>友情链接</cite> </a> </dd>
             <dd class=""> <a href="javascript:;" _href="./sys-qq.html"> <cite>第三方登录</cite> </a> </dd>
           </dl>
@@ -176,7 +175,7 @@
 
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon iconfont" style="top: 3px;">&#xe625;</i><cite>联系人管理</cite> </a>
           <dl class="layui-nav-child">
-            <dd class=""> <a href="javascript:;" _href="member-list.html"> <cite>联系人列表</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="contact-list.html"> <cite>联系人列表</cite> </a> </dd>
 
           </dl>
         </li>
@@ -184,10 +183,10 @@
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon " style="top: 3px;">&#xe634;</i><cite>客户服务管理</cite> </a>
           <dl class="layui-nav-child">
             <dd class="">
-            <dd class=""> <a href="javascript:;" _href="./banner-list.html"> <cite>客户服务记录</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./service-list.html"> <cite>客户服务记录</cite> </a> </dd>
             </dd>
             <dd class="">
-            <dd class=""> <a href="javascript:;" _href="./banner-list.html"> <cite>客户服务日程</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./service-rc.html"> <cite>客户服务日程</cite> </a> </dd>
             </dd>
           </dl>
         </li>
@@ -195,7 +194,7 @@
 
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon" style="top: 3px;">&#xe629;</i><cite>业绩统计</cite> </a>
           <dl class="layui-nav-child">
-            <dd class=""> <a href="javascript:;" _href="./echart.html"> <cite>统计报表</cite> </a> </dd>
+            <dd class=""> <a href="javascript:;" _href="./tj-echart.html"> <cite>统计报表</cite> </a> </dd>
           </dl>
         </li>
 
@@ -307,7 +306,7 @@
     }
 
     function member_show(title,url,id,w,h){
-      x_admin_show(title,url,w,h);
+      x_admin_show(title,url,id,w,h);
     }
 </script>
 <script>
