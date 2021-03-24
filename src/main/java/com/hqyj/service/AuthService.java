@@ -2,6 +2,7 @@ package com.hqyj.service;
 import com.hqyj.pojo.Auth;
 import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
+import com.hqyj.pojo.RoleInfo;
 
 import java.util.List;
 /**
@@ -22,4 +23,8 @@ public interface AuthService {
     void deletePermission(Integer pId);
     List<Role> getRoleByP(Integer pId);
     void deleteRole(Integer roleId);
+    Role getRoleById(Integer roleId);
+    void addRoleAnd(RoleInfo roleInfo);
+    void addPermission(Permission p);
+    Permission getPermissionById(Integer pId);
 }

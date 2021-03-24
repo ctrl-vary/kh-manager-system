@@ -4,6 +4,7 @@ import com.hqyj.dao.AuthDao;
 import com.hqyj.pojo.Auth;
 import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
+import com.hqyj.pojo.RoleInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -103,6 +104,35 @@ public class AuthServiceImp implements AuthService{
     public void deleteRole(Integer roleId) {
         authDao.deleteRole(roleId);
         authDao.deleteRolePermissionByRole(roleId);
+    }
+
+    @Override
+    public Role getRoleById(Integer roleId) {
+        return authDao.getRoleById(roleId);
+    }
+
+    @Override
+    public void addRoleAnd(RoleInfo roleInfo) {
+        Role role=new Role();
+        role.setDes(roleInfo.getDes());
+        role.setId(roleInfo.getId());
+        role.setName(roleInfo.getName());
+        int roleId=role.getId();
+        authDao.addRole(role);
+        List<Integer> pIds=roleInfo.getpIds();
+        for (Integer pId: pIds) {
+            authDao.addRolePermission(roleId,pId);
+        }
+
+    }
+    @Override
+    public void addPermission(Permission p) {
+        authDao.addPermission(p);
+    }
+
+    @Override
+    public Permission getPermissionById(Integer pId) {
+        return authDao.getPermissionById(pId);
     }
 
 }

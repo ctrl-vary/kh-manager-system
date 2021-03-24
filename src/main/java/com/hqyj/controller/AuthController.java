@@ -1,8 +1,10 @@
 package com.hqyj.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hqyj.pojo.Auth;
 import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
+import com.hqyj.pojo.RoleInfo;
 import com.hqyj.service.AuthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,10 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @program: shiyou
@@ -30,10 +29,10 @@ public class AuthController {
 
     /**
      * 获取角色展示信息
-     * @param m
+     * @param
      */
     @GetMapping("/getRolesAuth")
-    public void getRolesAuth(ModelMap m){
+    public HashMap<String,Object> getRolesAuth(ModelMap m){
         List<Integer> rolesId=authService.getRolesId();
         List<Auth> authList=new ArrayList<>();
         int dataNum=rolesId.size();
@@ -41,23 +40,42 @@ public class AuthController {
             Auth auth=authService.getRoleAuthInfo(a);
             authList.add(auth);
         }
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("info",authList);
+        map.put("dataNum",dataNum);
+        return map;
     }
 
     /**
-     * 获取角色具体权限
+     * 获取角色具体修改信息
      */
     @GetMapping("/getRolesAuthList")
-    public void getRolesAuthList(Integer roleId){
+    public String getRolesAuthList(Integer roleId,ModelMap m){
         List<Auth> authList=authService.getRoleAuth(roleId);
+        HashMap<String,Object> map=new HashMap<>();
+        Role role=authService.getRoleById(roleId);
+        //将role的名称和描述返回给model
+        m.addAttribute("info",authList);
+        m.addAttribute("name",role.getName());
+        m.addAttribute("des",role.getDes());
+        return "user/role-edit";
     }
-
     /**
-     * 删除角色权限
+     * 添加角色
+     * @param
+     */
+    @PostMapping("/addRole")
+    public String addRole(RoleInfo roleInfo){
+        authService.addRoleAnd(roleInfo);
+        return "添加成功";
+    }
+    /**
+     * 更新角色
      * @param authList
      */
     @PostMapping("/updateRole")
-    public void updateRole(List<Auth> authList){
-        if(authList.size()<=0){return;}
+    public String updateRole(List<Auth> authList){
+        if(authList.size()<=0){return "更新成功";}
         Auth auth=authList.get(0);
         Integer roleId=auth.getId();
 
@@ -71,39 +89,55 @@ public class AuthController {
         for (Integer i: delId) {
             authService.deleteRoleAuth(roleId,i);
         }
-
+        return "更新成功";
     }
-
+    /**
+     * 删除角色
+     * @param roleId
+     */
+    @GetMapping("/deleteRole")
+    public String deleteRole(Integer roleId){
+        authService.deleteRole(roleId);
+        return "删除成功";
+    }
+//////////////////////////////// 权限 ///////////////////////////////////////
     /**
      * 获取权限展示信息
      */
     @GetMapping("/getPermissionInfo")
-    public void getPermissionInfo(){
+    public HashMap<String,Object> getPermissionInfo(){
         List<Permission> permissionList=authService.getPermissions();
         int size=permissionList.size();
         for (Permission p: permissionList) {
             p.setBrRole(authService.getPermissionInfo(p.getId()));
         }
+       HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("info",permissionList);
+        hashMap.put("dataNum",size);
+        return hashMap;
     }
 
     /**
+     * 获取某个权限编辑表单的信息
+     * @param pId
+     * @param m
+     * @return
+     */
+    @GetMapping("/getPermissionById")
+    public String getPermissionById(Integer pId,ModelMap m){
+        Permission p=authService.getPermissionById(pId);
+        m.addAttribute("info",p);
+        return "user/rull-edit";
+    }
+    /**
      * 修改权限信息
      * @param p
-     * @param ids
+     * @param
      */
     @GetMapping("/updatePermission")
-    public void updatePermission(Permission p,List<Integer> ids){
+    public String updatePermission(Permission p){
         authService.updatePermission(p);
-        if(ids.size()>0){
-       List<Role> roleList=authService.getRoleByP(p.getId());
-       Set<Integer> oldRoleId=new HashSet<>();
-       List<Integer> delId=new ArrayList<>();
-        for (Role r: roleList) { oldRoleId.add(r.getId()); }
-            for (Integer id: ids) {
-                if(!oldRoleId.contains(id)){delId.add(id);}
-            }
-        }
-
+        return "修改成功";
     }
 
     /**
@@ -111,20 +145,24 @@ public class AuthController {
      * @param pId
      */
     @GetMapping("/deletePermission")
-    public void deletePermission(Integer pId){
+    public String deletePermission(Integer pId){
         authService.deletePermission(pId);
+        return "删除成功";
     }
 
     /**
-     * 删除角色
-     * @param roleId
+     * 添加
+     * @param p
+     * @return
      */
-    @GetMapping("/deleteRole")
-    public void deleteRole(Integer roleId){
-        authService.deleteRole(roleId);
+    @PostMapping("/addPermission")
+    public String addPermission(Permission p){
+        authService.addPermission(p);
+        return "添加成功";
     }
+
     /**
-     * 获取到需要取消与角色关系的权限
+     * 获取到需要取消与角色关系的权限,不用管
      * @param authList
      * @param roleId
      * @return
