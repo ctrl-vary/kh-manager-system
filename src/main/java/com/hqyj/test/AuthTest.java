@@ -28,10 +28,10 @@ public class AuthTest {
         List<Auth> authList=authService.getRoleAuth(3);
         System.out.println(authList.toString());
     }
-    @Test
-    public void test2(){
-        System.out.println(authService.getRoleAuthInfo(3));
-    }
+//    @Test
+//    public void test2(){
+//        System.out.println(authService.getRoleAuthInfo(3));
+//    }
     @Test
     public void test3(){
         System.out.println(authService.getRolesId());

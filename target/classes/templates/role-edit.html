@@ -23,7 +23,7 @@
                         <span class="x-red">*</span>角色名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="name" required="" lay-verify="required" value="系统管理员"
+                        <input type="text" id="name" name="name" required="" lay-verify="required" value="系统管理员"  th:value="${name}"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -38,13 +38,13 @@
                                     系统管理
                                 </td>
                                 <td>
-                                    <div class="layui-input-block">
-                                        <input name="id[]" type="checkbox"  value="2"> 用户列表
-                                        <input name="id[]" type="checkbox"  value="2"> 用户停用
-                                        <input name="id[]" type="checkbox" value="2"> 用户添加
-                                        <input name="id[]" type="checkbox"value="2"> 用户删除
-                                        <input name="id[]" type="checkbox" value="2"> 用户修改
-                                        <input name="id[]" type="checkbox"  value="2"> 用户改密
+                                    <div class="layui-input-block" id="auth_xt">
+                                        <input name="id[]" type="checkbox"  value="用户列表"> 用户列表
+                                        <input name="id[]" type="checkbox"  value="用户停用"> 用户停用
+                                        <input name="id[]" type="checkbox" value="用户添加"> 用户添加
+                                        <input name="id[]" type="checkbox" value="用户删除"> 用户删除
+                                        <input name="id[]" type="checkbox" value="用户修改"> 用户修改
+                                        <input name="id[]" type="checkbox"  value="用户改密"> 用户改密
                                     </div>
                                 </td>
                             </tr>
@@ -53,15 +53,15 @@
                                     客户管理
                                 </td>
                                 <td>
-                                    <div class="layui-input-block">
-                                        <input name="id[]" type="checkbox" checked=""  value="2"> 客户列表
-                                        <input name="id[]" type="checkbox" checked=""  value="2"> 经理列表
-                                        <input name="id[]" type="checkbox" value="2"> 客户添加
-                                        <input name="id[]" type="checkbox" value="2"> 客户删除
-                                        <input name="id[]" type="checkbox" value="2"> 客户修改
-                                        <input name="id[]" type="checkbox" value="2"> 经理添加
-                                        <input name="id[]" type="checkbox" value="2"> 经理删除
-                                        <input name="id[]" type="checkbox" value="2"> 经理修改
+                                    <div class="layui-input-block" id="auth_kh">
+                                        <input name="id[]" type="checkbox" value="客户列表" checked="checked"> 客户列表
+                                        <input name="id[]" type="checkbox"  value="经理列表" checked="checked"> 经理列表
+                                        <input name="id[]" type="checkbox" value="客户添加" checked="checked"> 客户添加
+                                        <input name="id[]" type="checkbox" value="客户删除" checked="checked"> 客户删除
+                                        <input name="id[]" type="checkbox" value="客户修改"> 客户修改
+                                        <input name="id[]" type="checkbox" value="经理添加"> 经理添加
+                                        <input name="id[]" type="checkbox" value="经理删除"> 经理删除
+                                        <input name="id[]" type="checkbox" value="经理修改"> 经理修改
                                     </div>
                                 </td>
                             </tr>
@@ -73,13 +73,14 @@
                         描述
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea">对客户，经理信息可进行浏览查询操作</textarea>
+                        <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"  th:value="${des}">对客户，经理信息进行增删改查</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                 <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
               </div>
             </form>
+            <input type="hidden" name="auth" id="auth"  th:value="${info}">
         </div>
         <script src="./lib/layui/layui.all.js" charset="utf-8">
         </script>
@@ -102,9 +103,29 @@
                 });
                 return false;
               });
-              
-              
             });
+
+            $(document).ready(function () {
+
+                var auth=document.getElementById("auth").value;
+                console.log(auth);
+
+
+                var name=$("input[name='name']").val();
+                console.log(name);
+                if(name=="客户管理员"||name=="客户经理"){
+                    document.getElementById("auth_xt").disabled="true";
+                }else if(name=="系统管理员"){
+                    document.getElementById("auth_kh").disabled="true";
+                }else {
+                    document.getElementById("auth_kh").disabled="true";
+                    document.getElementById("auth_xt").disabled="true";
+                }
+
+
+            })
+
+
         </script>
         
     </body>

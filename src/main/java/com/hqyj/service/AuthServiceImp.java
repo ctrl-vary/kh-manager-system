@@ -8,6 +8,8 @@ import com.hqyj.pojo.RoleInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -31,7 +33,6 @@ public class AuthServiceImp implements AuthService{
         List<Auth> authList=authDao.getRoleAuth(roleId);
         return authList;
     }
-
     /**
      * 获取每个角色的展示信息
      * @param roleId
@@ -52,6 +53,34 @@ public class AuthServiceImp implements AuthService{
         auth.setAuth(str.toString());
         return auth;
     }
+//    /**
+//     * 获取每个角色的展示信息
+//     * @param roleId
+//     * @return
+//     */
+//    @Override
+//    public HashMap<String,Object> getRoleAuthInfo(int roleId) {
+//        HashMap<String, Object> map=new HashMap<String, Object>();
+//        List<Auth> authList=authDao.getRoleAuth(roleId);
+//        if(authList.size()==0){return null;}
+//        Auth auth;
+//        auth=authList.get(0);
+//        StringBuilder str=null;
+//        str=new StringBuilder(auth.getAuth());
+//        for(int i=1;i<authList.size();i++){
+//            Auth a=authList.get(i);
+//            str.append(","+a.getAuth());
+//        }
+//        auth.setAuth(str.toString());
+//
+//        int dataNum=authDao.getRolesId().size();
+//        for (Integer a: authDao.getRolesId()) {
+//            authList.add(auth);
+//        }
+//        map.put("list",authList);
+//        map.put("dataNum",dataNum);
+//        return map;
+//    }
 
     @Override
     public List<Integer> getRolesId() {

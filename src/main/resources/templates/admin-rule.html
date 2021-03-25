@@ -25,15 +25,15 @@
         <div class="x-body">
             <form class="layui-form x-center" action="" style="width:70%">
                 <div class="layui-form-pane" style="margin-top: 15px;">
-                  <div class="layui-form-item" style="margin-left: 25%">
-                    <div class="layui-input-inline">
-                        <select name="js">
-                            <option value="">请选择角色</option>
-                            <option value="客户管理员">客户管理员</option>
-                            <option value="系统管理员">系统管理员</option>
+                  <div class="layui-form-item" style="margin-left: 30%">
+<!--                    <div class="layui-input-inline">-->
+<!--                        <select name="js">-->
+<!--                            <option value="">请选择角色</option>-->
+<!--                            <option value="客户管理员">客户管理员</option>-->
+<!--                            <option value="系统管理员">系统管理员</option>-->
 
-                        </select>
-                    </div>
+<!--                        </select>-->
+<!--                    </div>-->
                     <div class="layui-input-inline">
                       <input type="text" name="name"  placeholder="权限名称" autocomplete="off" class="layui-input">
                     </div>
@@ -44,7 +44,7 @@
                 </div> 
             </form>
             <xblock>
-                <button class="layui-btn"  onclick="rule_add('添加','./rule-add','','480')"><i class="layui-icon">&#xe608;</i>添加</button>
+                <button class="layui-btn"  onclick="rule_add('添加','./rule-add','440','300')"><i class="layui-icon">&#xe608;</i>添加</button>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
                 <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" >0</span> 条</span>
             </xblock>
@@ -58,42 +58,38 @@
                             ID
                         </th>
                         <th>
-                            权限规则
-                        </th>
-                        <th>
                             权限名称
                         </th>
                         <th>
-                            所属角色
+                            权限规则
                         </th>
                         <th>
                             操作
                         </th>
                     </tr>
                 </thead>
-                <tbody id="x-link">
-                    <tr>
+                <tbody id="x-link" >
+                    <tr th:each="i:${info}" id="info">
                         <td>
-                            <input type="checkbox"  name="num" onclick="num2()">
+                            <input type="checkbox"  name="num" onclick="num2()" >
                         </td>
-                        <td>
+                        <td  th:text="${i.id}">
                             1
                         </td>
-                        <td>
-                            cate-list
-                        </td>
-                        <td>
+                        <td  th:text="${i.name}">
                             客户列表
                         </td>
-                        <td>
-                            客户管理员
+                        <td  th:text="${i.rule}">
+                            cate-list
                         </td>
+
+
                         <td class="td-manage">
-                            <a title="编辑" href="javascript:;" onclick="rule_edit('编辑','./rule-edit','4','','480')"
+                            <a title="编辑" href="javascript:;" onclick="update(this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="rule_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="rule_del(this)"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
@@ -135,6 +131,8 @@
                 for(var i=0;i<num1.length;i++){
                     num1[i].checked = aaa1;
                 }
+                var info = document.getElementsByName("info").value;
+                console.log(info);
             }
 
             function num2() {
@@ -163,20 +161,38 @@
             function rule_add (title,url,w,h) {
                 x_admin_show(title,url,w,h);
             }
-            
 
-            //-编辑
-            function rule_edit (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
+            //打开修改页面方法
+            function update(obj) {
+                //获取当前选中行得userId值
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                //打开弹窗
+                x_admin_show("修改","/rule-edit?pId="+id,440,300)
             }
-            
-            /*删除*/
-            function rule_del(obj,id){
-                layer.confirm('确认要删除吗？',function(index){
-                    //发异步删除数据
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
-                });
+
+            /*-删除*/
+            function rule_del(obj){
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                layer.confirm("你确定要删除吗？",{icon:3,title:"警告"},function (index) {
+                    $.ajax({
+                        url:"/deletePermission",
+                        type:"post",
+                        data:{"pId":id},
+                        dataType:"json",
+                        success:function (data) {
+                            layer.alert(data.info)
+                            if(data.info=="删除成功"){
+                                //刷新
+                                //第一种
+                                // parent.window.location.href=parent.window.location.href;
+                                //第二种
+                                window.location.reload();
+                                $(obj).parent().parent().remove();
+
+                            }
+                        }
+                    })
+                })
             }
             </script>
             

@@ -38,14 +38,15 @@
                                     系统管理
                                 </td>
                                 <td>
-                                    <div class="layui-input-block">
-
-                                        <input name="id[]" type="checkbox" value="2"> 用户列表
-                                        <input name="id[]" type="checkbox" value="2"> 用户停用
-                                        <input name="id[]" type="checkbox" value="2"> 用户添加
-                                        <input name="id[]" type="checkbox" value="2"> 用户删除
-                                        <input name="id[]" type="checkbox" value="2"> 用户修改
-                                        <input name="id[]" type="checkbox" value="2"> 用户改密
+                                    <div class="layui-input-block" id="auth_kh">
+                                        <input name="id[]" type="checkbox" value="客户列表"> 客户列表
+                                        <input name="id[]" type="checkbox"  value="经理列表"> 经理列表
+                                        <input name="id[]" type="checkbox" value="客户添加"> 客户添加
+                                        <input name="id[]" type="checkbox" value="客户删除"> 客户删除
+                                        <input name="id[]" type="checkbox" value="客户修改"> 客户修改
+                                        <input name="id[]" type="checkbox" value="经理添加"> 经理添加
+                                        <input name="id[]" type="checkbox" value="经理删除"> 经理删除
+                                        <input name="id[]" type="checkbox" value="经理修改"> 经理修改
                                     </div>
                                 </td>
                             </tr>
@@ -54,7 +55,7 @@
                                     客户管理
                                 </td>
                                 <td>
-                                    <div class="layui-input-block">
+                                    <div class="layui-input-block" id="auth_xt">
                                         <input name="id[]" type="checkbox" value="2"> 客户列表
                                         <input name="id[]" type="checkbox" value="2"> 经理列表
                                         <input name="id[]" type="checkbox" value="2"> 客户添加
@@ -78,7 +79,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+                <button class="layui-btn" onclick="submit()">增加</button>
               </div>
             </form>
         </div>
@@ -92,20 +93,82 @@
               var form = layui.form
               ,layer = layui.layer;
 
-              //监听提交
-              form.on('submit(add)', function(data){
-                console.log(data);
-                layer.alert("增加成功", {icon: 6},function () {
-                    // 获得frame索引
-                    var index = parent.layer.getFrameIndex(window.name);
-                    //关闭当前frame
-                    parent.layer.close(index);
-                });
-                return false;
-              });
-              
-              
+              // //监听提交
+              // form.on('submit(add)', function(data){
+              //   console.log(data);
+              //   layer.alert("增加成功", {icon: 6},function () {
+              //       // 获得frame索引
+              //       var index = parent.layer.getFrameIndex(window.name);
+              //       //关闭当前frame
+              //       parent.layer.close(index);
+              //   });
+              //   return false;
+              // });
             });
+
+            //按钮提交
+            function submit() {
+                layer.msg("添加失败",{icon:5,time:2000});
+                // form.on('submit(add)', function(data){
+                var name=$("input[name='name']").val();
+
+                var idn=$("input[name='idn']").val();
+                var company=$("input[name='company']").val();
+                var managerid=$("input[name='managerid']").val();
+                var manager=$("input[name='manager']").val();
+                var phone=$("input[name='phone']").val();
+                var email=$("input[name='email']").val();
+                var bdate=$("input[name='bdate']").val();
+                var edu=$("input[name='region']").val();
+                var region=$("input[name='edu']").val();
+                var tips=$("textarea[name='tips']").val();
+                var gender=$("input[name='gender']:checked").val();
+                // var idn=$('#pid option:selected') .val();//所属栏目ID
+
+
+                if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+                {
+                    layer.msg('客户基本信息不能为空！',{icon:5,time:2000});return false;
+                }
+
+                else{
+                    if(url==""){
+                        url="/";
+                    }
+                    if(edu==""){
+                        edu="/";
+                    }
+                    if(tips==""){
+                        tips="/";
+                    }
+                    if(region==""){
+                        region="/";
+                    }
+                    $.ajax({
+                        type:"post",
+                        url:"/addKh",
+                        data:{"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
+                        dataType:"json",
+                        success:function(data)
+                        {
+                            if(data.info == "添加成功") {
+
+
+                                layer.msg(data.info, {icon: 6, time: 2000}, function () {
+                                    window.parent.location.reload();
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                });
+                                return false;
+                            }
+
+                            else{
+                                layer.msg(data.info,{icon:5,time:2000});return false;
+                            }
+                        }
+
+                    });}
+            }
         </script>
         
     </body>

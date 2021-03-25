@@ -60,6 +60,6 @@ public interface AuthDao {
     void deleteRole(Integer roleId);
     @Delete("DELETE FROM role_permission WHERE role_id=#{roleId}")
     void deleteRolePermissionByRole(Integer roleId);
-    @Delete("DELETE FROM role_permission WHERE permission_id=#{pId}")
+    @Delete("DELETE FROM role_permission WHERE p_id=#{pId}")
     void deleteRolePermissionByPermission(Integer pId);
 }

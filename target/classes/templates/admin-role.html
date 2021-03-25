@@ -17,8 +17,8 @@
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>会员管理</cite></a>
-              <a><cite>管理员列表</cite></a>
+              <a><cite>管理员管理</cite></a>
+              <a><cite>角色列表</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
@@ -28,7 +28,7 @@
         <button class="layui-btn"  style="background: #ff961d" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="role_add('添加','./role-add','600','440')"><i class="layui-icon"></i>添加</button>
         <input type="file"  id="excelInput" accept=".xlsx,.xlsb,.xlsm,.xls,.xml" class="layui-btn" onclick="chaneAction()" style="text-decoration:none"\>
-        <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" >0</span> 条</span></xblock>
+        <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span  id="dataNum" class="layui-badge" style="background: #ff961d" th:value="${dataNum}" >0</span> 条</span></xblock>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -54,26 +54,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="i:${info}">
             <td>
-                <input type="checkbox"  name="num" onclick="num2()">
+                <input type="checkbox"  name="num" onclick="num2()"  th:value="${i.id}">
             </td>
-            <td>
+            <td th:text="${i.id}">
                 1
-            </td>
-            <td>
+            </td >
+            <td th:text="${i.role}">
                 客户管理员
-            </td>
-            <td >
+            </td >
+            <td th:text="${i.auth}">
                 客户列表，经理列表
             </td>
-            <td >
+            <td th:text="${i.des}">
                 对客户，经理信息可进行浏览查询操作
             </td>
 
             <td class="td-manage">
 
-                <a title="编辑" href="javascript:;" onclick="role_edit('编辑','./role-edit','600','440')"
+                <a title="编辑" href="javascript:;" onclick="update(this)"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -87,15 +87,14 @@
     </table>
 
 
-    <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>
-    <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>
-    <div id="page"></div>
+
 
 </div>
 <script src="./lib/layui/layui.js" charset="utf-8"></script>
 <script src="./js/x-layui.js" charset="utf-8"></script>
 
 <script>
+
     layui.use(['laydate','element','laypage','layer'], function(){
         $ = layui.jquery;//jquery
         laydate = layui.laydate;//日期插件
@@ -103,15 +102,16 @@
         laypage = layui.laypage;//分页
         layer = layui.layer;//弹出层
 
-        //以上模块根据需要引入
-        laypage({
-            cont: 'page'
-            ,pages: 100
-            ,first: 1
-            ,last: 100
-            ,prev: '<em><</em>'
-            ,next: '<em>></em>'
-        });
+
+        // //以上模块根据需要引入
+        // laypage({
+        //     cont: 'page'
+        //     ,pages: 100
+        //     ,first: 1
+        //     ,last: 100
+        //     ,prev: '<em><</em>'
+        //     ,next: '<em>></em>'
+        // });
 
     });
     function num1(){
@@ -121,6 +121,8 @@
         for(var i=0;i<num1.length;i++){
             num1[i].checked = aaa1;
         }
+        var dataNum = document.getElementsByName("dataNum").value;
+        console.log(dataNum)
     }
 
     function num2() {
@@ -147,11 +149,14 @@
         x_admin_show(title,url,w,h);
     }
 
-
     //编辑
-    function role_edit (title,url,w,h) {
-        x_admin_show(title,url,w,h);
+    function update(obj) {
+        //获取当前选中行得Id值
+        var roleId=$(obj).parent().parent().find("td").eq(1).text();
+        //打开弹窗
+        x_admin_show("修改","/role-edit?roleId="+roleId,600,440)
     }
+
     /*删除*/
     function role_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){

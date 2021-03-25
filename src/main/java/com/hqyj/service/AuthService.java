@@ -4,6 +4,7 @@ import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
 import com.hqyj.pojo.RoleInfo;
 
+import java.util.HashMap;
 import java.util.List;
 /**
  * @program: shiyou
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public interface AuthService {
     List<Auth> getRoleAuth(int roleId);
+//    HashMap<String,Object> getRoleAuthInfo(int roleId);
     Auth getRoleAuthInfo(int roleId);
     List<Integer> getRolesId();
     void updateRole(Role role);
