@@ -5,11 +5,13 @@ import com.hqyj.service.KhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Console;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class KhController {
@@ -78,6 +80,32 @@ public class KhController {
         return map;
     }
 
+    /**
+     * 返回联系人列表
+     * @param jlId  经理Id
+     * @return
+     */
+    @GetMapping("/getLinkMan")
+    public HashMap<String,Object> getLinkMan(Integer jlId){
+        HashMap<String,Object> hashMap=new HashMap<>();
+        List<kh> khList=khService.getKhByJl(jlId);
+        //联系人列表
+        hashMap.put("info",khList);
+        //共有数据
+        hashMap.put("dataNum",khList.size());
+        return hashMap;
+    }
+
+    /**
+     * 添加联系人
+     * @param khInfo
+     * @return
+     */
+    @GetMapping("/addLinkMan")
+    public String addLinkMan(kh khInfo){
+        khService.add(khInfo);
+        return "添加成功";
+    }
     //处理删除的ajax请求
     @RequestMapping("/del")
     @ResponseBody

@@ -31,8 +31,8 @@ public class AuthController {
      * 获取角色展示信息
      * @param
      */
-    @GetMapping("/getRolesAuth")
-    public HashMap<String,Object> getRolesAuth(ModelMap m){
+    @GetMapping("/admin-role")
+    public String getRolesAuth(ModelMap m){
         List<Integer> rolesId=authService.getRolesId();
         List<Auth> authList=new ArrayList<>();
         int dataNum=rolesId.size();
@@ -40,10 +40,9 @@ public class AuthController {
             Auth auth=authService.getRoleAuthInfo(a);
             authList.add(auth);
         }
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("info",authList);
-        map.put("dataNum",dataNum);
-        return map;
+        m.put("info",authList);
+        m.put("dataNum",dataNum);
+        return "admin-role";
     }
 
     /**

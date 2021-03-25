@@ -118,4 +118,9 @@ public class KhServicelmpl implements KhService {
         return "删除失败";
     }
 
+    @Override
+    public List<kh> getKhByJl(Integer jlId) {
+        return khDao.getKhByJl(jlId);
+    }
+
 }

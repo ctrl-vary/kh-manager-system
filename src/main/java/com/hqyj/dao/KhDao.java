@@ -25,7 +25,8 @@ public interface KhDao {
     //根据经理编号查询
     @Select("select * from kh where managerid=#{managerid}")
     List<kh> findByManagerId(kh kh);
-
+    @Select("select * from kh where managerid=#{jlId}")
+    List<kh> getKhByJl(Integer jlId);
     //根据经理姓名查询
     @Select("select * from kh where manager=#{manager}")
     List<kh> findByManager(kh kh);

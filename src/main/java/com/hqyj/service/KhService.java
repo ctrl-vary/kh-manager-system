@@ -5,6 +5,7 @@ import com.hqyj.pojo.kh;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 public interface KhService {
     //添加
@@ -22,5 +23,6 @@ public interface KhService {
     //删除
     String del(kh kh);
 
+    List<kh> getKhByJl(Integer jlId);
 
 }
