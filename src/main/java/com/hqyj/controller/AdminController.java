@@ -1,16 +1,27 @@
 package com.hqyj.controller;
 import com.hqyj.pojo.UserInfo;
+import com.hqyj.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+
 @Controller
 public class AdminController {
+
+    @Autowired
+    UserInfoService userInfoService;
     //访问 管理员列表页面
     @RequestMapping("/admin-list")
-    public String adminlist(){
+    public String adminlist(UserInfo user, ModelMap m){
+        HashMap<String, Object> map=userInfoService.selectByJointime(user);
+        //把数据传到前端
+        m.put("info",map);
+        //将查询条件回显
+
         return "admin-list";
     }
 
