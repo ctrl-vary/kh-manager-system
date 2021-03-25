@@ -38,6 +38,14 @@ public interface UserInfoService {
 
     //修改头像
     String updateHead(UserInfo user, HttpServletRequest request);
+
+    String updateAdmin(UserInfo user);
+
+    String updatemember(UserInfo user);
+    //添加admin
+    String addAdmin(UserInfo user);
+    //添加admin
+    String addMember(UserInfo user);
 }
 
 

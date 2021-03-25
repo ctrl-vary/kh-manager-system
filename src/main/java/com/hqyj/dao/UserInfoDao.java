@@ -1,6 +1,7 @@
 package com.hqyj.dao;
 
 import com.hqyj.pojo.UserInfo;
+import org.apache.catalina.util.ServerInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -48,6 +49,14 @@ public interface UserInfoDao {
     @Update("update userInfo set userName=#{userName} where userId=#{userId}")
     int update(UserInfo user);
 
+    //修改admin
+    @Update("update userInfo set userName=#{userName},email=#{email},js=#{js},userPwd=#{userPwd} where userId=#{userId}")
+    int updateAdmin(UserInfo user);
+
+    //修改member(客户经理)
+    @Update("update userInfo set userName=#{userName},email=#{email} where userId=#{userId}")
+    int updatemember(UserInfo user);
+
     //删除
     @Delete("delete from userInfo where userId=#{userId}")
     int del(UserInfo user);
@@ -67,6 +76,14 @@ public interface UserInfoDao {
     //修改头像
     @Update("update userInfo set url=#{url} where userId=#{userId}")
     int updateHead(UserInfo user);
+
+    //添加admin
+    @Insert("insert into UserInfo (userName,email,salt,js,userPwd,joinTime) value (#{userName},#{email},#{salt},#{js},#{userPwd},#{joinTime})")
+    int addAdmin(UserInfo user);
+
+    //添加member
+    @Insert("insert into UserInfo (userName,email,salt,js,userPwd,joinTime) value (#{userName},#{email},#{salt},#{js},#{userPwd},#{joinTime})")
+    int addMember(UserInfo user);
 }
 
 

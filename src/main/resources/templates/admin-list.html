@@ -23,7 +23,7 @@
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <form class="layui-form x-center" action="" style="width:80%">
+    <form class="layui-form x-center" style="width:80%" action=""  >
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
                 <label class="layui-form-label">日期范围</label>
@@ -240,6 +240,9 @@
     }
     //编辑
     function admin_edit (title,url,w,h) {
+        //获取当前选中行得userId值
+      /*  var id=$(obj).parent().parent().find("td").eq(1).text();
+        x_admin_show("修改","/admin-edit?userId="+id,500,500)*/
         x_admin_show(title,url,w,h);
     }
     /*删除*/
