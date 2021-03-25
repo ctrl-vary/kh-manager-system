@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 /**
  * @program: shiyou
@@ -25,7 +26,13 @@ public class AuthTest {
     AuthDao authDao;
     @Test
     public void test1(){
-        List<Auth> authList=authService.getRoleAuth(3);
+        List<Integer> rolesId=authService.getRolesId();
+        List<Auth> authList=new ArrayList<>();
+        int dataNum=rolesId.size();
+        for (Integer a: rolesId) {
+            Auth auth=authService.getRoleAuthInfo(a);
+            authList.add(auth);
+        }
         System.out.println(authList.toString());
     }
     @Test
