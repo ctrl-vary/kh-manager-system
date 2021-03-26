@@ -566,8 +566,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public String delMember(UserInfo user) {
         int num=userInfoDao.del(user);
-        int bb = userInfo_Copy1Dao.addMemberCopy(user);
+
         if(num>0){
+            int bb = userInfo_Copy1Dao.addMemberCopy(user);
             return "删除成功";
         }
         return "删除失败";
