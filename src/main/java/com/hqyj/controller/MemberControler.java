@@ -113,6 +113,25 @@ public class MemberControler {
         return "member-password";
     }
 
+    //修改密码
+    @RequestMapping("/updateMemberPwd")
+    @ResponseBody
+    public HashMap<String,Object> updateMemberPwd(UserInfo user){
+
+        HashMap<String,Object> map=new HashMap<String,Object>();
+
+        String salt = user.getSalt();
+        //加密用户输入的密码
+        String pwd = mdfive.encrypt(user.getUserPwd(),salt);
+        //把加过密码的传到数据层中
+        user.setUserPwd(pwd);
+
+        String info=userInfoService.updateMemberPwd(user);
+
+        map.put("info",info);
+        return map;
+    }
+
     //处理删除的ajax请求
     @RequestMapping("/delMember")
     @ResponseBody

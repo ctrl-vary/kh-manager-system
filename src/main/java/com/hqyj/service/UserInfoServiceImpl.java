@@ -517,4 +517,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         return "删除失败";
     }
 
+    @Override
+    public String updateMemberPwd(UserInfo user) {
+        int num = userInfoDao.updateMemberPwd(user);
+
+        if (num > 0) {
+
+            return "修改成功";
+        }
+        return "修改失败";
+
+    }
+
 }

@@ -50,6 +50,10 @@ public interface UserInfoService {
     String addMember(UserInfo user);
     //删除
     String delAdmin(UserInfo user);
+
+    //修改member密码
+    String updateMemberPwd(UserInfo user);
+
 }
 
 

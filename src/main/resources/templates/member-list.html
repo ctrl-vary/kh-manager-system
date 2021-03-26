@@ -87,7 +87,7 @@
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改密码','./member-password','1','360','360')"
+                            <a style="text-decoration:none"  onclick="update_member_password('修改密码','./member-password','','380','440')"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
@@ -216,8 +216,10 @@
                 x_admin_show(title,url,w,h);
             }
             /*密码-修改*/
-            function member_password(title,url,id,w,h){
-                x_admin_show(title,url,w,h);
+            function update_member_password(title,url,id,w,h){
+
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                x_admin_show(title,url,id,w,h);
             }
             /*用户-删除*/
             function member_del(obj){

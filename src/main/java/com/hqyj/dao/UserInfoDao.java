@@ -88,6 +88,10 @@ public interface UserInfoDao {
     //添加member
     @Insert("insert into UserInfo (userName,email,salt,js,userPwd,joinTime) value (#{userName},#{email},#{salt},#{js},#{userPwd},#{joinTime})")
     int addMember(UserInfo user);
+
+    //修改密码(member)
+    @Update("update userInfo set userPwd=#{userPwd} where userName=#{userName} and userId=#{userId}")
+    int updateMemberPwd(UserInfo user);
 }
 
 
