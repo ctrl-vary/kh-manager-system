@@ -27,9 +27,14 @@ public interface UserInfoService {
 
     //只查询客户经理的记录
     HashMap<String,Object> selectByJs(UserInfo user);
+    //查询被删除的用户
+    HashMap<String,Object> selectDisuser(UserInfo user);
 
     //根据userId查询
     UserInfo selectByUserId(UserInfo user);
+
+    //根据userId查询删除用户表的记录
+    UserInfo selectByUserId2(UserInfo user);
 
     //修改
     String update(UserInfo user);
@@ -55,9 +60,14 @@ public interface UserInfoService {
 
     //删除admin
     String delAdmin(UserInfo user);
+    //删除
+    String delMember(UserInfo user);
 
     //修改member密码
     String updateMemberPwd(UserInfo user);
+
+    //删除
+    String delAll(UserInfo user);
 
 }
 

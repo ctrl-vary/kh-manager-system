@@ -53,56 +53,33 @@
                         <th>
                             <input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()">
                         </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            用户名
-                        </th>
-
-                        <th>
-                            邮箱
-                        </th>
-                        <td >
-                            角色
-                        </td>
-                        <th>
-                            加入时间
-                        </th>
-                        <th>
-                            状态
-                        </th>
-                        <th>
-                            操作
-                        </th>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <td >角色</td>
+                        <th>加入时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                        <!--七个属性值-->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox"  name="num" onclick="num2()">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                    <tr th:each="i:${info.list}">
+                        <td><input type="checkbox"  name="num" onclick="num2()"></td>
+                        <td th:text="${i.userId}">1</td>
+                        <td th:text="${i.userName}"><u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
                                 张三
                             </u>
                         </td>
 
-                        <td >
-                            123456@mail.com
-                        </td>
+                        <td th:text="${i.email}">123456@mail.com</td>
 
-                        <td >
-                            客户经理
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
+                        <td th:text="${i.js}">客户经理</td>
+
+                        <td th:text="${i.joinTime}">2017-01-01 11:11:42</td>
+
                         <td class="td-status">
-                            <span class="layui-btn layui-btn-danger ">
+                            <span class="layui-btn layui-btn-danger " th:text="${i.period}">
                                 已删除
                             </span>
                         </td>
