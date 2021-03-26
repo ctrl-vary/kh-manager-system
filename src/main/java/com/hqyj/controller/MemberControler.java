@@ -135,9 +135,19 @@ public class MemberControler {
     //处理删除的ajax请求
     @RequestMapping("/delMember")
     @ResponseBody
-    public HashMap<String,Object> delAdmin(UserInfo user){
+    public HashMap<String,Object> delMember(UserInfo user){
         HashMap<String,Object> map=new HashMap<String,Object>();
-        String info=userInfoService.delAdmin(user);
+        String info=userInfoService.delMember(user);
+        map.put("info",info);
+        return map;
+    }
+
+    //处理选中的member删除的ajax请求
+    @RequestMapping("/delMemberAll")
+    @ResponseBody
+    public HashMap<String,Object> delMemberAll(UserInfo user){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=userInfoService.delAll(user);
         map.put("info",info);
         return map;
     }
@@ -146,11 +156,11 @@ public class MemberControler {
     @RequestMapping("/member-del")
     public String memberdel(UserInfo user, ModelMap m){
 
-        //根据userId查询
-        UserInfo u=userInfoService.selectByUserId(user);
-
+        HashMap<String, Object> map=userInfoService.selectDisuser(user);
         //把数据传到前端
-        m.addAttribute("user",u);
+        m.put("info",map);
+        //将查询条件回显
+
         return "member-del";
     }
 

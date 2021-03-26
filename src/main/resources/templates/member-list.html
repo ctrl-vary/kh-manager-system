@@ -175,13 +175,49 @@
             }
 
             //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
+            function delAll () {
+                let checkedId=new Array();  //定义一个数组来保存已选中的value值
+                $('input[name="num"]:checked').each(function(){
+                    if(!isNaN($(this).val())){
+                        checkedId.push($(this).val());
+                    }else{
+                        console.log("拿不到");
+                    }
                 });
-             }
-             /*用户-添加*/
+                if(checkedId.length == 0){
+                    layer.msg('请选择要删除的信息！', {icon: 5});
+                    return false;
+                }
+                console.log("拿到的数组为："+checkedId);
+                console.log("拿到的字符串为："+checkedId.toString());
+                layer.confirm('确认要删除选中吗？',function(index) {
+                    for (var i = 0; i < checkedId.length; i++) {
+                        //进行批量删除操作
+                        $.ajax({
+                            url: "/delMemberAll",
+                            type: "get",
+                            data: {"userId": checkedId[i]},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.info == "删除成功") {
+                                    layer.msg('删除成功', {icon: 1});
+                                    //刷新
+                                    //第一种
+                                    // parent.window.location.href=parent.window.location.href;
+                                    window.location.reload();
+                                    //第二种
+                                    $(obj).parent().parent().remove();
+
+                                }
+                            }
+                        })
+
+                    }
+                })
+            }
+
+
+            /*用户-添加*/
             function member_add(title,url,w,h){
                 x_admin_show(title,url,w,h);
             }
@@ -224,6 +260,11 @@
             /*用户-删除*/
             function member_del(obj){
                 var id=$(obj).parent().parent().find("td").eq(1).text();
+                var name=$(obj).parent().parent().find("td").eq(2).text();
+                var email=$(obj).parent().parent().find("td").eq(3).text();
+                var js=$(obj).parent().parent().find("td").eq(4).text();
+                var jT=$(obj).parent().parent().find("td").eq(5).text();
+
                 layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
@@ -232,7 +273,7 @@
                 $.ajax({
                     url:"/delMember",
                     type:"get",
-                    data:{"userId":id},
+                    data:{"userId":id,"userName":name,"email":email,"js":js,"joinTime":jT},
                     dataType:"json",
                     success:function (data) {
                         layer.alert(data.info)

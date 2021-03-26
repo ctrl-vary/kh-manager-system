@@ -3,6 +3,7 @@ package com.hqyj.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hqyj.dao.UserInfoDao;
+import com.hqyj.dao.UserInfo_Copy1Dao;
 import com.hqyj.pojo.UserInfo;
 import com.hqyj.util.MdFive;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     //创建一个userInfoDao的实现类对象
     @Autowired(required = false)
     UserInfoDao userInfoDao;
+
+    @Autowired(required = false)
+    UserInfo_Copy1Dao userInfo_Copy1Dao;
 
     //创建加密工具类对象
     @Autowired
@@ -386,9 +390,52 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     }
 
+    //查询被删除的用户
+    @Override
+    public HashMap<String, Object> selectDisuser(UserInfo user) {
+        HashMap<String, Object> map=new HashMap<String, Object>();
+        //设置分页参数
+        PageHelper.startPage(user.getPage(),user.getRow());
+
+        List<UserInfo> list=new ArrayList<>();
+
+        list = userInfo_Copy1Dao.select(user);
+
+        //把查询的数据转换成分页对象
+        PageInfo<UserInfo> page = new PageInfo<UserInfo>(list);
+        //获取分页的当前页集合
+        map.put("list",page.getList());
+        //获取总条数
+        map.put("total",page.getTotal());
+        //总页数
+        map.put("totalPage",page.getPages());
+        //上一页
+        if(page.getPrePage()==0){
+            map.put("pre",1);
+        }else{
+            map.put("pre",page.getPrePage());
+        }
+        //下一页
+        //保持在最后一页
+        if(page.getNextPage()==0){
+            map.put("next",page.getPages());
+        }else{
+            map.put("next",page.getNextPage());
+        }
+        //当前页
+        map.put("cur",page.getPageNum());
+        return map;
+    }
+
     @Override
     public UserInfo selectByUserId(UserInfo user) {
+
         return userInfoDao.selectByUserId(user);
+    }
+
+    @Override
+    public UserInfo selectByUserId2(UserInfo user) {
+        return userInfo_Copy1Dao.selectByUserId(user);
     }
 
     @Override
@@ -516,6 +563,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         return "删除失败";
     }
+    @Override
+    public String delMember(UserInfo user) {
+        int num=userInfoDao.del(user);
+        int bb = userInfo_Copy1Dao.addMemberCopy(user);
+        if(num>0){
+            return "删除成功";
+        }
+        return "删除失败";
+    }
 
     @Override
     public String updateMemberPwd(UserInfo user) {
@@ -526,6 +582,16 @@ public class UserInfoServiceImpl implements UserInfoService {
             return "修改成功";
         }
         return "修改失败";
+
+    }
+
+    @Override
+    public String delAll(UserInfo user) {
+        int num=userInfoDao.del(user);
+        if(num>0){
+            return "删除成功";
+        }
+        return "删除失败";
 
     }
 
