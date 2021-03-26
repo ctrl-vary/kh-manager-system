@@ -1,6 +1,7 @@
 package com.hqyj.pojo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 //描述表userinfo的信息
 public class UserInfo extends MyPage implements Serializable {
@@ -13,6 +14,30 @@ public class UserInfo extends MyPage implements Serializable {
 
     //描述修改密码的旧密码
     private String oldPwd;
+
+    private Date joinTime;
+
+    public Date getJoinTime() {
+        return joinTime;
+    }
+
+    public void setJoinTime(Date joinTime) {
+        this.joinTime = joinTime;
+    }
+
+
+
+    private String period;
+
+
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
 
     public String getJs() {
         return js;
