@@ -1,6 +1,9 @@
 package com.hqyj.controller;
 
+import com.hqyj.dao.SysLogDao;
+import com.hqyj.pojo.SysLog;
 import com.hqyj.pojo.UserInfo;
+import com.hqyj.service.SysLogService;
 import com.hqyj.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,7 +24,8 @@ public class LoginController {
     //创建一个userInfoService的实现类对象
     @Autowired
     UserInfoService userInfoService;
-
+    @Resource
+    SysLogService sysLogService;
     //接收用户发送的登录信息，用户名和密码
     //ModelMap 是用来把服务端的值传给前端的
     @RequestMapping("/loginForm")
@@ -44,7 +49,16 @@ public class LoginController {
         HashMap<String,Object> map = new HashMap<String,Object>();
         String info = userInfoService.login(user,request);
         map.put("info",info);
-
+        SysLog sysLog=new SysLog();
+        String ip=null;
+        if (request.getHeader("x-forwarded-for") == null) {
+            ip= request.getRemoteAddr();
+        }
+        sysLog.setRole(user.getJs());
+        sysLog.setIp(ip);
+        sysLog.setContent(info);
+        sysLog.setUserName(user.getUserName());
+        sysLogService.insert(sysLog);
         return map;
     }
     //访问注册页面zhuce.html

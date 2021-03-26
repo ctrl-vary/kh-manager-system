@@ -2,6 +2,7 @@ package com.hqyj.test;
 
 import com.hqyj.dao.AuthDao;
 import com.hqyj.pojo.Auth;
+import com.hqyj.pojo.Permission;
 import com.hqyj.pojo.Role;
 import com.hqyj.service.AuthService;
 import org.junit.Test;
@@ -54,5 +55,12 @@ public class AuthTest {
     @Test
     public void test5(){
         System.out.println(authDao.getRoleByP(1).toString());
+    }
+    @Test
+    public void test6(){
+        Permission permission=new Permission();
+        permission.setId(4);
+        permission.setName("几点开始");
+        authDao.updatePermission(permission);
     }
 }
