@@ -17,7 +17,7 @@
     
     <body>
         <div class="x-body">
-            <form class="layui-form">
+            <form class="layui-form" id="add" method="post" enctype="multipart/form-data">
                 <div class="layui-form-item">
                     <label for="username" class="layui-form-label">
                         <span class="x-red">*</span>登录名
@@ -27,16 +27,7 @@
                         autocomplete="off" class="layui-input" placeholder="将会成为唯一的登入名">
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label for="phone" class="layui-form-label">
-                        <span class="x-red">*</span>手机
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="phone" name="phone" required="" lay-verify="phone"
-                        autocomplete="off" class="layui-input">
-                    </div>
 
-                </div>
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
@@ -48,11 +39,11 @@
 
                 </div>
                 <div class="layui-form-item">
-                    <label for="role" class="layui-form-label">
+                    <label for="js" class="layui-form-label">
                         <span class="x-red">*</span>角色
                     </label>
                     <div class="layui-input-inline">
-                      <select name="role">
+                      <select name="js" id="js">
                         <option value="">请选择角色</option>
                         <option value="客户管理员">客户管理员</option>
                         <option value="系统管理员">系统管理员</option>
@@ -80,7 +71,7 @@
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" lay-filter="add" onclick="add()" >
                         增加
                     </button>
                 </div>
@@ -125,6 +116,46 @@
               
               
             });
+
+            function add() {
+
+                var name=$("input[name='username']").val();
+                var email=$("input[name='email']").val();
+                var pwd = $("input[name='pass']").val();
+                var js = $("select[name='js']").val();
+                if(name==""||email==""||pwd==""||js=="")
+                {
+                    layer.msg('用户基本信息不能为空！',{icon:5,time:2000});return false;
+                }
+                else{
+                    //发送 ajax请求
+                    $.ajax({
+                        url: "/addAdmin",
+                        type: "post",
+                        data:{"userName":name,"email":email,"userPwd":pwd,"js":js},
+                        dataType: "json",//返回的数据类型
+                        success: function (data) {
+                            //如果注册成功就跳转到登录页面
+                            if (data.info=="添加成功") {
+                                layer.alert("添加成功",function (index) {
+
+                                    //关闭弹窗
+                                    // 获得frame索引
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    //关闭当前frame
+                                    parent.layer.close(index);
+                                    parent.location.reload();
+
+                                })
+                                return false;
+                            }
+                            else{
+                                layer.msg(data.info,{icon:5,time:2000});return false;
+                            }
+                        }
+                    })
+
+                }}
         </script>
         
     </body>

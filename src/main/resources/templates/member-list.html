@@ -49,56 +49,31 @@
             <table class="layui-table">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()">
-                        </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            登录名
-                        </th>
-
-                        <th>
-                            邮箱
-                        </th>
-                        <th>
-                            角色
-                        </th>
-                        <th>
-                            加入时间
-                        </th>
-                        <th>
-                            状态
-                        </th>
-                        <th>
-                            操作
-                        </th>
+                        <th><input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()"></th>
+                        <th>ID</th>
+                        <th>登录名</th>
+                        <th>邮箱</th>
+                        <th>角色</th>
+                        <th>加入时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="i:${info.list}">
                         <td>
                             <input type="checkbox"  name="num" onclick="num2()">
                         </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
+                        <td th:text="${i.userId}">1</td>
+                        <td th:text="${i.userName}">
                             <u style="cursor:pointer" onclick="member_show('用户资料','./member-show','10001','360','360')">
                                 xs
                             </u>
                         </td>
-                        <td >
-                            2446521385@qq.com
-                        </td>
+                        <td th:text="${i.email}">2446521385@qq.com</td>
+                        <td th:text="${i.js}">客户经理</td>
+                        <td th:text="${i.joinTime}">2021.01.02 12:11:54</td>
 
-                        <td >
-                            客户经理
-                        </td>
-                        <td >
-                            2021.01.02 12:11:54
-                        </td>
                         <td class="td-status">
                             <span class="layui-btn layui-btn-normal ">
                                 已启用
@@ -112,7 +87,7 @@
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改密码','./member-password','1','360','360')"
+                            <a style="text-decoration:none"  onclick="update_member_password('修改密码','./member-password','','380','440')"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
@@ -200,13 +175,49 @@
             }
 
             //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
+            function delAll () {
+                let checkedId=new Array();  //定义一个数组来保存已选中的value值
+                $('input[name="num"]:checked').each(function(){
+                    if(!isNaN($(this).val())){
+                        checkedId.push($(this).val());
+                    }else{
+                        console.log("拿不到");
+                    }
                 });
-             }
-             /*用户-添加*/
+                if(checkedId.length == 0){
+                    layer.msg('请选择要删除的信息！', {icon: 5});
+                    return false;
+                }
+                console.log("拿到的数组为："+checkedId);
+                console.log("拿到的字符串为："+checkedId.toString());
+                layer.confirm('确认要删除选中吗？',function(index) {
+                    for (var i = 0; i < checkedId.length; i++) {
+                        //进行批量删除操作
+                        $.ajax({
+                            url: "/delMemberAll",
+                            type: "get",
+                            data: {"userId": checkedId[i]},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.info == "删除成功") {
+                                    layer.msg('删除成功', {icon: 1});
+                                    //刷新
+                                    //第一种
+                                    // parent.window.location.href=parent.window.location.href;
+                                    window.location.reload();
+                                    //第二种
+                                    $(obj).parent().parent().remove();
+
+                                }
+                            }
+                        })
+
+                    }
+                })
+            }
+
+
+            /*用户-添加*/
             function member_add(title,url,w,h){
                 x_admin_show(title,url,w,h);
             }
@@ -241,16 +252,39 @@
                 x_admin_show(title,url,w,h);
             }
             /*密码-修改*/
-            function member_password(title,url,id,w,h){
-                x_admin_show(title,url,w,h);
+            function update_member_password(title,url,id,w,h){
+
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                x_admin_show(title,url,id,w,h);
             }
             /*用户-删除*/
-            function member_del(obj,id){
+            function member_del(obj){
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                var name=$(obj).parent().parent().find("td").eq(2).text();
+                var email=$(obj).parent().parent().find("td").eq(3).text();
+                var js=$(obj).parent().parent().find("td").eq(4).text();
+                var jT=$(obj).parent().parent().find("td").eq(5).text();
+
                 layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!',{icon:1,time:1000});
                 });
+                $.ajax({
+                    url:"/delMember",
+                    type:"get",
+                    data:{"userId":id,"userName":name,"email":email,"js":js,"joinTime":jT},
+                    dataType:"json",
+                    success:function (data) {
+                        layer.alert(data.info)
+                        if(data.info=="删除成功"){
+
+                            window.location.reload();
+                            $(obj).parent().parent().remove();
+
+                        }
+                    }
+                })
             }
             </script>
             
