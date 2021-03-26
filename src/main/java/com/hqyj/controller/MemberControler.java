@@ -41,11 +41,11 @@ public class MemberControler {
     //访问用户管理-用户列表页面
     @RequestMapping("/member-list")
     public String showM(UserInfo userInfo, ModelMap m){
-        HashMap<String, Object> map=userInfoService.select(userInfo);
+        HashMap<String, Object> map=userInfoService.selectByJs(userInfo);
         //        //把数据传到前端
         m.put("info",map);
         //将查询条件回显
-        m.put("vv",userInfo.getConValue());
+        //m.put("vv",userInfo.getConValue());
         return "member-list";
     }
 
@@ -111,6 +111,16 @@ public class MemberControler {
         //把数据传到前端
         m.addAttribute("user",u);
         return "member-password";
+    }
+
+    //处理删除的ajax请求
+    @RequestMapping("/delMember")
+    @ResponseBody
+    public HashMap<String,Object> delAdmin(UserInfo user){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=userInfoService.delAdmin(user);
+        map.put("info",info);
+        return map;
     }
 
     //访问 删除用户的页面

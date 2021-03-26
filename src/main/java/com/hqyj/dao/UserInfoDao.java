@@ -69,6 +69,10 @@ public interface UserInfoDao {
     @Select("select * from userInfo where userName=#{userName}")
     List<UserInfo> findByUserName(UserInfo user);
 
+    //根据userId查询(只有客户经理的数据)
+    @Select("select * from userInfo where js='客户经理'")
+    List<UserInfo> selectByJs(UserInfo user);
+
     //修改密码
     @Update("update userInfo set userPwd=#{userPwd} where userId=#{userId}")
     int updatePwd(UserInfo user);

@@ -23,6 +23,8 @@ public interface UserInfoService {
     HashMap<String,Object> select(UserInfo user);
     //查询(有加入时间)
     HashMap<String,Object> selectByJointime(UserInfo user);
+    //只查询客户经理的记录
+    HashMap<String,Object> selectByJs(UserInfo user);
 
     //根据userId查询
     UserInfo selectByUserId(UserInfo user);
@@ -46,6 +48,8 @@ public interface UserInfoService {
     String addAdmin(UserInfo user);
     //添加admin
     String addMember(UserInfo user);
+    //删除
+    String delAdmin(UserInfo user);
 }
 
 

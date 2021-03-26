@@ -54,27 +54,13 @@
             <th>
                 <input type="checkbox" id="a1" name="a1" value="1" onclick="num1()">
             </th>
-            <th>
-                ID
-            </th>
-            <th>
-                登录名
-            </th>
-            <th>
-                邮箱
-            </th>
-            <th>
-                角色
-            </th>
-            <th>
-                加入时间
-            </th>
-            <th>
-                状态
-            </th>
-            <th>
-                操作
-            </th>
+            <th>ID</th>
+            <th>登录名</th>
+            <th>邮箱</th>
+            <th>角色</th>
+            <th>加入时间</th>
+            <th>状态</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -207,11 +193,52 @@
 
     //批量删除提交
     function delAll () {
-        layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
+       /* layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});
         });
+    }*/
+        let checkedId=new Array();  //定义一个数组来保存已选中的value值
+        $('input[name="num"]:checked').each(function(){
+            if(!isNaN($(this).val())){
+                checkedId.push($(this).val());
+            }else{
+                console.log("拿不到");
+            }
+        });
+        if(checkedId.length == 0){
+            layer.msg('请选择要删除的信息！', {icon: 5});
+            return false;
+        }
+        console.log("拿到的数组为："+checkedId);
+        console.log("拿到的字符串为："+checkedId.toString());
+        layer.confirm('确认要删除选中吗？',function(index) {
+            for (var i = 0; i < checkedId.length; i++) {
+                //进行批量删除操作
+                $.ajax({
+                    url: "/delAdmin",
+                    type: "get",
+                    data: {"userId": checkedId[i]},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.info == "删除成功") {
+                            layer.msg('删除成功', {icon: 1});
+                            //刷新
+                            //第一种
+                            // parent.window.location.href=parent.window.location.href;
+                            window.location.reload();
+                            //第二种
+                            $(obj).parent().parent().remove();
+
+                        }
+                    }
+                })
+
+            }
+        })
     }
+
+
     /*添加*/
     function admin_add(title,url,w,h){
         x_admin_show(title,url,w,h);
@@ -246,11 +273,29 @@
         x_admin_show(title,url,w,h);
     }
     /*删除*/
-    function admin_del(obj,id){
+    function admin_del(obj){
+        var id=$(obj).parent().parent().find("td").eq(1).text();
         layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
             //发异步删除数据
             $(obj).parents("tr").remove();
             layer.msg('已删除!',{icon:1,time:1000});
+
+            $.ajax({
+                url:"/delAdmin",
+                type:"get",
+                data:{"userId":id},
+                dataType:"json",
+                success:function (data) {
+                    layer.alert(data.info)
+                    if(data.info=="删除成功"){
+
+                        window.location.reload();
+                        $(obj).parent().parent().remove();
+
+                    }
+                }
+            })
+
         });
     }
 </script>

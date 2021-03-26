@@ -32,6 +32,16 @@ public class AdminController {
         return "admin-list";
     }
 
+    //处理删除的ajax请求
+    @RequestMapping("/delAdmin")
+    @ResponseBody
+    public HashMap<String,Object> delAdmin(UserInfo user){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=userInfoService.delAdmin(user);
+        map.put("info",info);
+        return map;
+    }
+
     @RequestMapping("/admin-cate")
     public String admincate(){
         return "admin-cate";

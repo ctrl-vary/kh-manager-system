@@ -350,6 +350,43 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public HashMap<String, Object> selectByJs(UserInfo user) {
+        HashMap<String, Object> map=new HashMap<String, Object>();
+        //设置分页参数
+        PageHelper.startPage(user.getPage(),user.getRow());
+
+        List<UserInfo> list=new ArrayList<>();
+
+        list = userInfoDao.selectByJs(user);
+
+        //把查询的数据转换成分页对象
+        PageInfo<UserInfo> page = new PageInfo<UserInfo>(list);
+        //获取分页的当前页集合
+        map.put("list",page.getList());
+        //获取总条数
+        map.put("total",page.getTotal());
+        //总页数
+        map.put("totalPage",page.getPages());
+        //上一页
+        if(page.getPrePage()==0){
+            map.put("pre",1);
+        }else{
+            map.put("pre",page.getPrePage());
+        }
+        //下一页
+        //保持在最后一页
+        if(page.getNextPage()==0){
+            map.put("next",page.getPages());
+        }else{
+            map.put("next",page.getNextPage());
+        }
+        //当前页
+        map.put("cur",page.getPageNum());
+        return map;
+
+    }
+
+    @Override
     public UserInfo selectByUserId(UserInfo user) {
         return userInfoDao.selectByUserId(user);
     }
@@ -469,6 +506,15 @@ public class UserInfoServiceImpl implements UserInfoService {
             return "添加成功";
         }
         return "添加失败";
+    }
+
+    @Override
+    public String delAdmin(UserInfo user) {
+        int num=userInfoDao.del(user);
+        if(num>0){
+            return "删除成功";
+        }
+        return "删除失败";
     }
 
 }
