@@ -49,56 +49,31 @@
             <table class="layui-table">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()">
-                        </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            登录名
-                        </th>
-
-                        <th>
-                            邮箱
-                        </th>
-                        <th>
-                            角色
-                        </th>
-                        <th>
-                            加入时间
-                        </th>
-                        <th>
-                            状态
-                        </th>
-                        <th>
-                            操作
-                        </th>
+                        <th><input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()"></th>
+                        <th>ID</th>
+                        <th>登录名</th>
+                        <th>邮箱</th>
+                        <th>角色</th>
+                        <th>加入时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="i:${info.list}">
                         <td>
                             <input type="checkbox"  name="num" onclick="num2()">
                         </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
+                        <td th:text="${i.userId}">1</td>
+                        <td th:text="${i.userName}">
                             <u style="cursor:pointer" onclick="member_show('用户资料','./member-show','10001','360','360')">
                                 xs
                             </u>
                         </td>
-                        <td >
-                            2446521385@qq.com
-                        </td>
+                        <td th:text="${i.email}">2446521385@qq.com</td>
+                        <td th:text="${i.js}">客户经理</td>
+                        <td th:text="${i.joinTime}">2021.01.02 12:11:54</td>
 
-                        <td >
-                            客户经理
-                        </td>
-                        <td >
-                            2021.01.02 12:11:54
-                        </td>
                         <td class="td-status">
                             <span class="layui-btn layui-btn-normal ">
                                 已启用
@@ -112,7 +87,7 @@
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改密码','./member-password','1','360','360')"
+                            <a style="text-decoration:none"  onclick="update_member_password('修改密码','./member-password','','380','440')"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
@@ -241,16 +216,34 @@
                 x_admin_show(title,url,w,h);
             }
             /*密码-修改*/
-            function member_password(title,url,id,w,h){
-                x_admin_show(title,url,w,h);
+            function update_member_password(title,url,id,w,h){
+
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                x_admin_show(title,url,id,w,h);
             }
             /*用户-删除*/
-            function member_del(obj,id){
+            function member_del(obj){
+                var id=$(obj).parent().parent().find("td").eq(1).text();
                 layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!',{icon:1,time:1000});
                 });
+                $.ajax({
+                    url:"/delMember",
+                    type:"get",
+                    data:{"userId":id},
+                    dataType:"json",
+                    success:function (data) {
+                        layer.alert(data.info)
+                        if(data.info=="删除成功"){
+
+                            window.location.reload();
+                            $(obj).parent().parent().remove();
+
+                        }
+                    }
+                })
             }
             </script>
             

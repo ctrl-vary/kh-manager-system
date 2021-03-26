@@ -14,18 +14,18 @@
 
 <body>
 <div class="x-body">
-  <form class="layui-form">
+  <form class="layui-form" id="add" method="post" enctype="multipart/form-data">
     <div class="layui-form-item">
-      <label for="L_username" class="layui-form-label"> <span class="x-red">*</span>登录名 </label>
+      <label for="username" class="layui-form-label"> <span class="x-red">*</span>登录名 </label>
       <div class="layui-input-inline">
-        <input type="text" id="L_username" name="username" required lay-verify="nikename"
+        <input type="text" id="username" name="username" required lay-verify="nikename"
                autocomplete="off" class="layui-input" placeholder="将会成为唯一的登入名">
       </div>
     </div>
     <div class="layui-form-item">
-      <label for="L_email" class="layui-form-label"> <span class="x-red">*</span>邮箱 </label>
+      <label for="email" class="layui-form-label"> <span class="x-red">*</span>邮箱 </label>
       <div class="layui-input-inline">
-        <input type="text" id="L_email" name="email" required lay-verify="email"
+        <input type="text" id="email" name="email" required lay-verify="email"
                         autocomplete="off" class="layui-input" placeholder="将会成为唯一的登入邮箱">
       </div>
     </div>
@@ -47,7 +47,7 @@
     </div>
     <div class="layui-form-item">
       <label for="L_repass" class="layui-form-label"> </label>
-      <button  class="layui-btn" lay-filter="add" lay-submit=""> 增加 </button>
+      <button  class="layui-btn" lay-filter="add" onclick="add()"> 增加 </button>
     </div>
   </form>
 </div>
@@ -88,9 +88,47 @@
                 });
                 return false;
               });
-              
-              
+
             });
+            function add() {
+
+                var name=$("input[name='username']").val();
+                var email=$("input[name='email']").val();
+                var pwd = $("input[name='pass']").val();
+
+                if(name==""||email==""||pwd=="")
+                {
+                    layer.msg('用户基本信息不能为空！',{icon:5,time:2000});return false;
+                }
+                else{
+                    //发送 ajax请求
+                    $.ajax({
+                        url: "/addMember",
+                        type: "post",
+                        data:{"userName":name,"email":email,"userPwd":pwd},
+                        dataType: "json",//返回的数据类型
+                        success: function (data) {
+                            //如果注册成功就跳转到登录页面
+                            if (data.info=="添加成功") {
+                                layer.alert("添加成功",function (index) {
+
+                                    //关闭弹窗
+                                    // 获得frame索引
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    //关闭当前frame
+                                    parent.layer.close(index);
+                                    parent.location.reload();
+
+                                })
+                                return false;
+                            }
+                            else{
+                                layer.msg(data.info,{icon:5,time:2000});return false;
+                            }
+                        }
+                    })
+
+                }}
         </script>
 </body>
 </html>

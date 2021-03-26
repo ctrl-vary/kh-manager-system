@@ -41,7 +41,6 @@
         </div>
 
 
-
         <div class="layui-form-item" style="width: 64px;height: 38px"  onclick="update()" >
             <button class="layui-btn" type="button"  >
                 修改
@@ -62,9 +61,8 @@
 
         var userName=$("input[name='userName']").val();
         var email=$("input[name='email']").val();
-        var role=$("input[name='role']").val();
         var userId=$("input[name='userId']").val();
-        if(userName==""||email==""||role=="")
+        if(userName==""||email=="")
         {
             layer.msg('用户基本信息不能为空！',{icon:5,time:2000});return false;
         }else {
@@ -73,7 +71,7 @@
             $.ajax({
                 url: "/edit2",
                 type: "post",
-                data:{"userId":userId,"userName":userName,"role":role,"email":email},
+                data:{"userId":userId,"userName":userName,"email":email},
                 dataType: "json",//返回的数据类型
                 success: function (data) {
                     //如果注册成功就跳转到登录页面
@@ -98,10 +96,6 @@
             })
 
         }}
-
-
-
-
 
 
     //加载文件上传组件

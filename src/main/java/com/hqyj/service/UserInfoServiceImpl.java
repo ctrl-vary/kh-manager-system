@@ -134,31 +134,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             return "该用户账号已被锁定，请一分钟后再尝试";
         }
 
-//        //查询用户名是否存在,如果存在就取出其盐值
-//        UserInfo u=userInfoDao.selectByName(user);
-//
-//        if(u!=null){
-//            //加密用户输入的密码
-//            String pwd = mdfive.encrypt(user.getUserPwd(),u.getSalt());
-//            //把加过密码的传到数据层中
-//            user.setUserPwd(pwd);
-//            //查询数据层的登录方法，并且拿到返回值
-//            UserInfo userinfo =userInfoDao.login(user);
-//            //如果查询到值，userinfo就不等于null，否则就等于null
-//            if(userinfo!=null){
-//                //创建session对象
-//                HttpSession session = request.getSession();
-//                //存用户对象
-//                session.setAttribute("user",userinfo);
-//                return "登录成功";
-//            }
-//        }else{
-//            return "用户名输入错误";
-//        }
-//
-//
-//
-//        return "登录失败";
     }
 
     @Override
@@ -339,6 +314,79 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public HashMap<String, Object> selectByJointime(UserInfo user) {
+        HashMap<String, Object> map=new HashMap<String, Object>();
+        //设置分页参数
+        PageHelper.startPage(user.getPage(),user.getRow());
+
+        List<UserInfo> list=new ArrayList<>();
+
+        list = userInfoDao.select();
+
+        //把查询的数据转换成分页对象
+        PageInfo<UserInfo> page = new PageInfo<UserInfo>(list);
+        //获取分页的当前页集合
+        map.put("list",page.getList());
+        //获取总条数
+        map.put("total",page.getTotal());
+        //总页数
+        map.put("totalPage",page.getPages());
+        //上一页
+        if(page.getPrePage()==0){
+            map.put("pre",1);
+        }else{
+            map.put("pre",page.getPrePage());
+        }
+        //下一页
+        //保持在最后一页
+        if(page.getNextPage()==0){
+            map.put("next",page.getPages());
+        }else{
+            map.put("next",page.getNextPage());
+        }
+        //当前页
+        map.put("cur",page.getPageNum());
+        return map;
+    }
+
+    @Override
+    public HashMap<String, Object> selectByJs(UserInfo user) {
+        HashMap<String, Object> map=new HashMap<String, Object>();
+        //设置分页参数
+        PageHelper.startPage(user.getPage(),user.getRow());
+
+        List<UserInfo> list=new ArrayList<>();
+
+        list = userInfoDao.selectByJs(user);
+
+        //把查询的数据转换成分页对象
+        PageInfo<UserInfo> page = new PageInfo<UserInfo>(list);
+        //获取分页的当前页集合
+        map.put("list",page.getList());
+        //获取总条数
+        map.put("total",page.getTotal());
+        //总页数
+        map.put("totalPage",page.getPages());
+        //上一页
+        if(page.getPrePage()==0){
+            map.put("pre",1);
+        }else{
+            map.put("pre",page.getPrePage());
+        }
+        //下一页
+        //保持在最后一页
+        if(page.getNextPage()==0){
+            map.put("next",page.getPages());
+        }else{
+            map.put("next",page.getNextPage());
+        }
+        //当前页
+        map.put("cur",page.getPageNum());
+        return map;
+
+    }
+
+    @Override
     public UserInfo selectByUserId(UserInfo user) {
         return userInfoDao.selectByUserId(user);
     }
@@ -414,6 +462,71 @@ public class UserInfoServiceImpl implements UserInfoService {
             return "保存成功";
         }
           return "保存失败";
+    }
+
+    @Override
+    public String updateAdmin(UserInfo user) {
+
+        int num = userInfoDao.updateAdmin(user);
+
+        if (num > 0) {
+
+            return "修改成功";
+        }
+        return "修改失败";
+
+    }
+
+    @Override
+    public String updatemember(UserInfo user) {
+
+        int num = userInfoDao.updatemember(user);
+
+        if (num > 0) {
+
+            return "修改成功";
+        }
+        return "修改失败";
+
+    }
+
+    @Override
+    public String addAdmin(UserInfo user) {
+        int n = userInfoDao.addAdmin(user);
+        if(n>0){
+            return "添加成功";
+        }
+        return "添加失败";
+    }
+
+    @Override
+    public String addMember(UserInfo user) {
+        int n = userInfoDao.addMember(user);
+        if(n>0){
+            return "添加成功";
+        }
+        return "添加失败";
+    }
+
+    @Override
+    public String delAdmin(UserInfo user) {
+        int num=userInfoDao.del(user);
+        if(num>0){
+            return "删除成功";
+        }
+        return "删除失败";
+    }
+
+    @Override
+    public String updateMemberPwd(UserInfo user) {
+        int num = userInfoDao.updateMemberPwd(user);
+
+        if (num > 0) {
+
+            return "修改成功";
+        }
+        return "修改失败";
+
     }
 
 }
