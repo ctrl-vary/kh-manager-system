@@ -312,7 +312,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         map.put("cur",page.getPageNum());
         return map;
     }
-
+    ///////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public HashMap<String, Object> selectByJointime(UserInfo user) {
         HashMap<String, Object> map=new HashMap<String, Object>();

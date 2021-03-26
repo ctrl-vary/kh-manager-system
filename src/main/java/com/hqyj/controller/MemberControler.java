@@ -77,6 +77,7 @@ public class MemberControler {
 
         return "member-add";
     }
+
     //处理添加客户请求
     @RequestMapping("/addMember")
     @ResponseBody
@@ -97,6 +98,7 @@ public class MemberControler {
         user.setJoinTime(date);
         user.setJs("客户经理");
         String info = userInfoService.addMember(user);
+        System.out.println(info+"-----------------------------------");
         map.put("info",info);
         return map;
     }

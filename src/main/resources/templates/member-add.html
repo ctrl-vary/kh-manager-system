@@ -16,9 +16,9 @@
 <div class="x-body">
   <form class="layui-form" id="add" method="post" enctype="multipart/form-data">
     <div class="layui-form-item">
-      <label for="username" class="layui-form-label"> <span class="x-red">*</span>登录名 </label>
+      <label for="userName" class="layui-form-label"> <span class="x-red">*</span>登录名 </label>
       <div class="layui-input-inline">
-        <input type="text" id="username" name="username" required lay-verify="nikename"
+        <input type="text" id="userName" name="userName" required lay-verify="nikename"
                autocomplete="off" class="layui-input" placeholder="将会成为唯一的登入名">
       </div>
     </div>
@@ -31,23 +31,23 @@
     </div>
 
     <div class="layui-form-item">
-      <label for="L_pass" class="layui-form-label"> <span class="x-red">*</span>密码 </label>
+      <label for="userPwd" class="layui-form-label"> <span class="x-red">*</span>密码 </label>
       <div class="layui-input-inline">
-        <input type="password" id="L_pass" name="pass" required lay-verify="pass"
+        <input type="password" id="userPwd" name="userPwd" required lay-verify="pass"
                         autocomplete="off" class="layui-input" placeholder=" 6到16个字符">
       </div>
 
     </div>
     <div class="layui-form-item">
-      <label for="L_repass" class="layui-form-label"> <span class="x-red">*</span>确认密码 </label>
+      <label for="surePwd" class="layui-form-label"> <span class="x-red">*</span>确认密码 </label>
       <div class="layui-input-inline">
-        <input type="password" id="L_repass" name="repass" required lay-verify="repass"
+        <input type="password" id="surePwd" name="surePwd" required lay-verify="repass"
                         autocomplete="off" class="layui-input" placeholder=" 6到16个字符">
       </div>
     </div>
     <div class="layui-form-item">
-      <label for="L_repass" class="layui-form-label"> </label>
-      <button  class="layui-btn" lay-filter="add" onclick="add()"> 增加 </button>
+      <label  class="layui-form-label"> </label>
+      <button  class="layui-btn"  onclick="add()"> 增加 </button>
     </div>
   </form>
 </div>
@@ -58,7 +58,7 @@
 <script>
             layui.use(['form','layer'], function(){
                 $ = layui.jquery;
-              var form = layui.form()
+              var form = layui.form
               ,layer = layui.layer;
             
               //自定义验证规则
@@ -91,14 +91,15 @@
 
             });
             function add() {
+              console.log("add")
 
-                var name=$("input[name='username']").val();
+                var name=$("input[name='userName']").val();
                 var email=$("input[name='email']").val();
-                var pwd = $("input[name='pass']").val();
+                var pwd = $("input[name='userPwd']").val();
 
                 if(name==""||email==""||pwd=="")
                 {
-                    layer.msg('用户基本信息不能为空！',{icon:5,time:2000});return false;
+                    layer.msg('必填项不能为空！',{icon:5,time:2000});return false;
                 }
                 else{
                     //发送 ajax请求
@@ -108,8 +109,10 @@
                         data:{"userName":name,"email":email,"userPwd":pwd},
                         dataType: "json",//返回的数据类型
                         success: function (data) {
+                          console.log("submitcg")
                             //如果注册成功就跳转到登录页面
                             if (data.info=="添加成功") {
+                              console.log("tjcg")
                                 layer.alert("添加成功",function (index) {
 
                                     //关闭弹窗

@@ -21,8 +21,10 @@ public interface UserInfoService {
 
     //查询
     HashMap<String,Object> select(UserInfo user);
+
     //查询(有加入时间)
     HashMap<String,Object> selectByJointime(UserInfo user);
+
     //只查询客户经理的记录
     HashMap<String,Object> selectByJs(UserInfo user);
 
@@ -44,11 +46,14 @@ public interface UserInfoService {
     String updateAdmin(UserInfo user);
 
     String updatemember(UserInfo user);
+
     //添加admin
     String addAdmin(UserInfo user);
-    //添加admin
+
+    //添加member
     String addMember(UserInfo user);
-    //删除
+
+    //删除admin
     String delAdmin(UserInfo user);
 
     //修改member密码
