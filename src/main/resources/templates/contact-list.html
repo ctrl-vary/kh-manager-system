@@ -37,7 +37,7 @@
                         </select>
                     </div>
                     <div class="layui-input-inline" style="width:150px">
-                        <input type="text" name="conValue" id="conValue" th:value="${vv}" placeholder="请输入查询条件" autocomplete="off" class="layui-input">
+                        <input type="text" name="conValue" id="conValue"  placeholder="请输入查询条件" autocomplete="off" class="layui-input">
                     </div>
 
                     <div class="layui-input-inline" style="width:80px">
@@ -52,7 +52,7 @@
             <button class="layui-btn" onclick="banner_add('添加栏目','./contact-add','1180','770')"><i class="layui-icon"></i>添加</button>
             <input type="file"  id="excelInput" accept=".xlsx,.xlsb,.xlsm,.xls,.xml" class="layui-btn" onclick="chaneAction()" style="text-decoration:none"/>
             <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">
-                共有数据：<span class="layui-badge" style="background: #ff961d" th:text="10">0</span> 条</span>
+                共有数据：<span class="layui-badge" style="background: #ff961d" th:text="${dataNum}">0</span> 条</span>
         </xblock>
         <table class="layui-table" id="out-table">
             <thead>
@@ -60,33 +60,45 @@
                 <th>
                     <input type="checkbox" name="" value="1">
                 </th>
-                <th> 客户名称 </th>
-                <th> 客户电话 </th>
-                <th> 地址 </th>
+                <th> 编号 </th>
+                <th> 姓名 </th>
                 <th> 性别 </th>
-                <th> 邮箱 </th>
+                <th> 照片 </th>
+                <th> 联系电话 </th>
+                <th> 邮箱地址 </th>
+                <th> 出生日期 </th>
+                <th> 学历 </th>
+                <th> 身份证号码 </th>
+                <th> 所属地区 </th>
+                <th> 客户单位 </th>
+                <th> 备注 </th>
                 <th> 操作 </th>
 
             </tr>
             </thead>
             <tbody>
-            <tr >
+            <tr th:each="i:${info}" >
                 <td>
                     <input type="checkbox" value="1" name="">
                 </td>
-                <td th:text="张三"> 客户名 </td>
-                <td th:text="17888265793"> 客户电话</td>
-                <td th:text="四川省成都市"> 地址 </td>
-                <td th:text="男"> 性别 </td>
-                <td th:text="email.ww"> 邮箱 </td>
-
-
+                <td th:text="${i.id}"> 1 </td>
+                <td th:text="${i.name}"> 张三</td>
+                <td th:text="${i.gender}"> 男 </td>
+                <td> <img th:src="${i.url}" width="100" height="100" alt="" /> </td>
+                <td th:text="${i.phone}"> 13167281117 </td>
+                <td th:text="${i.email}"> 123@qq.com</td>
+                <td th:text="${i.bdate}"> 1999.11.23</td>
+                <td th:text="${i.edu}"> 大学本科</td>
+                <td th:text="${i.idn}"> 513901199911239909</td>
+                <td th:text="${i.region}"> 四川</td>
+                <td th:text="${i.company}"> juzi有限公司</td>
+                <td th:text="${i.tips}"> 待定</td>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;" onclick="update(this)"
                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
-                    <a title="删除" href="javascript:;" onclick="data_del(this,'1')"
+                    <a title="删除" href="javascript:;" onclick="data_del(this)"
                        style="text-decoration:none">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
@@ -97,8 +109,8 @@
         <div id="page">
             <a id="pre" class="layui-btn" >上一页</a>
             <a id="next" class="layui-btn" >下一页</a>
-            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" th:text="3">0</span> 页</span>
-            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="1">0</span> 页</span>
+            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>
+            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d">0</span> 页</span>
 
         </div>
 
@@ -142,7 +154,7 @@
             //获取当前选中行得userId值
             var id=$(obj).parent().parent().find("td").eq(1).text();
             //打开弹窗
-            x_admin_show("修改","/contact-edit?userId=",500,500)
+            x_admin_show("修改","/contact-edit?id=",360,360)
         }
 
         /*-删除*/

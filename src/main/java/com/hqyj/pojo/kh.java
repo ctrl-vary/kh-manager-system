@@ -3,6 +3,15 @@ package com.hqyj.pojo;
 import java.io.Serializable;
 
 public class kh  extends MyPage implements Serializable {
+    public String getSend() {
+        return send;
+    }
+
+    public void setSend(String send) {
+        this.send = send;
+    }
+
+    private String send;
     public String getCondition() {
         if(condition==null){
             return null;

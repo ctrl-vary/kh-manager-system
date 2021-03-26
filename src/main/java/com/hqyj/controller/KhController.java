@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
@@ -17,23 +19,20 @@ import java.util.List;
 public class KhController {
     @Autowired
     KhService khService;
+    //excel导出
+    @RequestMapping("/excelWrite")
+    public void excelWrite(HttpServletResponse response){
+
+        khService.excelWrite(response);
+    }
 
     //访问 添加客户列表页面页面
     @RequestMapping("/cate-add")
     public String cateadd(){
         return "cate-add";
     }
-    //访问 添加联系人列表页面页面
-    @RequestMapping("/contact-add")
-    public String contactdd(){
-        return "contact-add";
-    }
-    //访问 添加客户服务列表页面页面
-    @RequestMapping("/banner-add")
-    public String banneradd(){
-        return "banner-add";
-    }
-   
+
+
 
     //访问 编辑客户列表页面页面
     @RequestMapping("/cate-edit")
@@ -69,6 +68,19 @@ public class KhController {
         return "cate-list";
     }
 
+    //访问 客户生日页面页面
+    @RequestMapping("/cate-birth")
+    public String sr(kh kh, ModelMap m){
+        HashMap<String, Object> map=khService.selectSr(kh);
+        System.out.println(map+"map________________________");
+        System.out.println(kh.getId()+"id________________________");
+        //把数据传到前端
+        m.put("info",map);
+//        //将查询条件回显
+//        m.put("vv",kh.getConValue());
+        return "cate-birth";
+    }
+
     //处理添加客户请求
     @RequestMapping("/addKh")
     @ResponseBody
@@ -79,33 +91,6 @@ public class KhController {
         map.put("info",info);
         return map;
     }
-
-    /**
-     * 返回联系人列表
-     * @param jlId  经理Id
-     * @return
-     */
-    @GetMapping("/getLinkMan")
-    public HashMap<String,Object> getLinkMan(Integer jlId){
-        HashMap<String,Object> hashMap=new HashMap<>();
-        List<kh> khList=khService.getKhByJl(jlId);
-        //联系人列表
-        hashMap.put("info",khList);
-        //共有数据
-        hashMap.put("dataNum",khList.size());
-        return hashMap;
-    }
-
-    /**
-     * 添加联系人
-     * @param khInfo
-     * @return
-     */
-    @GetMapping("/addLinkMan")
-    public String addLinkMan(kh khInfo){
-        khService.add(khInfo);
-        return "添加成功";
-    }
     //处理删除的ajax请求
     @RequestMapping("/del")
     @ResponseBody
@@ -115,4 +100,43 @@ public class KhController {
         map.put("info",info);
         return map;
     }
+    ////////////////////////////////////////////////////////////////////////
+    /**
+     * 返回联系人列表
+     * @param jlId  经理Id
+     * @return
+     */
+    @GetMapping("/contact-list")
+    public String getLinkMan(Integer jlId,ModelMap m){
+        System.out.println(jlId+"id-------------------------");
+        List<kh> khList=khService.getKhByJl(jlId);
+        System.out.println(khList.size()+"num+++++++++++++++++++++++++");
+        //联系人列表
+        m.put("info",khList);
+        //共有数据
+        m.put("dataNum",khList.size());
+        return "contact-list";
+    }
+    //访问 添加联系人列表页面页面
+    @RequestMapping("/contact-add")
+    public String contactdd(){
+        return "contact-add";
+    }
+    /**
+     * 添加联系人
+     * @param kh
+     * @return
+     */
+    @PostMapping("/addLinkMan")
+    @ResponseBody
+    public HashMap<String,Object> addLinkMan(kh kh){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        khService.add(kh);
+        String info="添加成功";
+        map.put("info",info);
+        return map;
+    }
+
+
+
 }

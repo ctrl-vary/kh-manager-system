@@ -279,8 +279,8 @@
             var url=$("input[name='url']").val();
             var idn=$("input[name='idn']").val();
             var company=$("input[name='company']").val();
-            var managerid=$("input[name='managerid']").val();
-            var manager=$("input[name='manager']").val();
+             var managerid=1;
+             var manager='李文';
             var phone=$("input[name='phone']").val();
             var email=$("input[name='email']").val();
             var bdate=$("input[name='bdate']").val();
@@ -291,9 +291,9 @@
             // var idn=$('#pid option:selected') .val();//所属栏目ID
 
 
-            if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+            if(name==""||idn==""||phone==""||email==""||company==""||bdate=="")
             {
-                layer.msg('客户基本信息不能为空！',{icon:5,time:2000});return false;
+                layer.msg('联系人基本信息不能为空！',{icon:5,time:2000});return false;
             }
 
             else{
@@ -311,7 +311,7 @@
                 }
                 $.ajax({
                     type:"post",
-                    url:"/addKh",
+                    url:"/addLinkMan",
                     data:{"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
                     dataType:"json",
                     success:function(data)

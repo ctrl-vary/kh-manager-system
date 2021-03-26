@@ -38,7 +38,7 @@
             </div>
         </div>
 
-
+<input id="id" type="hidden" name="id"  th:value="${info.id}" >
         <div class="layui-form-item" style="width: 64px;height: 38px"  onclick="update()" >
             <button class="layui-btn"  type="button">
                 修改
@@ -69,9 +69,10 @@
     $(document).ready(function () {
         var name=$("input[name='name']").val();
         var rule=$("textarea[name='rule']").val();
+        var id=$("input[name='id']").val();
         console.log(name);
         console.log(rule);
-
+        console.log(id);
     })
 
     //修改
@@ -81,7 +82,7 @@
 
         var name=$("input[name='name']").val();
         var rule=$("textarea[name='rule']").val();
-
+        var id=$("input[name='id']").val();
         if(name==""||rule=="")
         {
             layer.msg('必填项不能为空！',{icon:5,time:2000});return false;
@@ -91,7 +92,7 @@
             $.ajax({
                 url: "/updatePermission",
                 type: "post",
-                data:{"name":name,"rule":rule},
+                data:{"name":name,"rule":rule,"id":id},
                 dataType: "json",//返回的数据类型
                 success: function (data) {
                     //如果注册成功就跳转到登录页面

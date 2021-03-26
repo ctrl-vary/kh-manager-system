@@ -25,8 +25,10 @@ public interface KhDao {
     //根据经理编号查询
     @Select("select * from kh where managerid=#{managerid}")
     List<kh> findByManagerId(kh kh);
+
     @Select("select * from kh where managerid=#{jlId}")
     List<kh> getKhByJl(Integer jlId);
+
     //根据经理姓名查询
     @Select("select * from kh where manager=#{manager}")
     List<kh> findByManager(kh kh);
@@ -42,4 +44,8 @@ public interface KhDao {
     //删除
     @Delete("delete from kh where id=#{id}")
     int del(kh kh);
+
+    //客户生日分页查询
+    @Select("select id,name,gender,email,bdate,send from kh")
+    List<kh> selectSr();
 }

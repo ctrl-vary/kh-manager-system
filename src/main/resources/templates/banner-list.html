@@ -58,7 +58,7 @@
         <thead>
         <tr>
             <th>
-                <input type="checkbox" name="" value="1">
+                <input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()">
             </th>
             <th> 服务类型 </th>
             <th> 服务日期 </th>
@@ -74,7 +74,7 @@
         <tbody>
         <tr >
             <td>
-                <input type="checkbox" value="1" name="">
+                <input type="checkbox" th:value="${i.id}" name="num" onclick="num2()">
             </td>
             <td th:text="解决客户投诉"> 服务类型 </td>
             <td th:text="2020年11月3日"> 服务日期</td>

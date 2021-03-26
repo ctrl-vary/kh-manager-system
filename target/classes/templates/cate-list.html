@@ -44,10 +44,12 @@
                   </div>
                 </div> 
             </form>
+            <form action="excelWrite" >
             <xblock><button class="layui-btn"  style="background: #ff961d" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                 <button class="layui-btn" onclick="banner_add('添加栏目','./cate-add','1180','770')"><i class="layui-icon"></i>添加</button>
                 <input type="file"  id="excelInput" accept=".xlsx,.xlsb,.xlsm,.xls,.xml" class="layui-btn" onclick="chaneAction()" style="text-decoration:none"\>
-                <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" th:text="${info.total}">0</span> 条</span></xblock>
+                <button  type="submit" class="layui-btn"  style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" th:text="${info.total}">0</span> 条</span></xblock>
+            </form>
             <table class="layui-table" id="out-table">
                 <thead>
                     <tr>

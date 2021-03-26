@@ -91,25 +91,7 @@
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label for="managerid" class="layui-form-label">
-                <span class="x-red">*</span>经理编号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="managerid" name="managerid" required="" lay-verify="number"
-                       autocomplete="off" class="layui-input" th:value="${kh.managerid}">
-            </div>
-        </div>
 
-        <div class="layui-form-item">
-            <label for="manager" class="layui-form-label">
-                <span class="x-red">*</span>经理姓名
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="manager" name="manager" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input" th:value="${kh.manager}">
-            </div>
-        </div>
 
         <div class="layui-form-item">
             <input type="hidden" name="url" class="image" id="url">
@@ -215,8 +197,8 @@
         var url=$("input[name='url']").val();
         var idn=$("input[name='idn']").val();
         var company=$("input[name='company']").val();
-        var managerid=$("input[name='managerid']").val();
-        var manager=$("input[name='manager']").val();
+        var managerid=1;
+        var manager='李文';
         var phone=$("input[name='phone']").val();
         var email=$("input[name='email']").val();
         var bdate=$("input[name='bdate']").val();
@@ -225,9 +207,9 @@
         var tips=$("textarea[name='tips']").val();
         var gender=$("input[name='gender']:checked").val();
         var id=$("input[name='id']").val();
-        if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+        if(name==""||idn==""||phone==""||email==""||company==""||bdate=="")
         {
-            layer.msg('客户基本信息不能为空！',{icon:5,time:2000});return false;
+            layer.msg('联系人基本信息不能为空！',{icon:5,time:2000});return false;
         }
         else{
             if(url==""){
@@ -244,7 +226,7 @@
             }
             //发送 ajax请求
             $.ajax({
-                url: "/edit",
+                url: "/edit1",
                 type: "post",
                 data:{"id":id,"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
                 dataType: "json",//返回的数据类型

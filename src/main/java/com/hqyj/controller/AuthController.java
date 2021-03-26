@@ -24,7 +24,7 @@ import java.util.*;
  * @Date 2021/3/23 20:33
  */
 @Controller
-@RequestMapping("/auth")
+//@RequestMapping("/auth")
 public class AuthController {
     @Resource
     AuthService authService;

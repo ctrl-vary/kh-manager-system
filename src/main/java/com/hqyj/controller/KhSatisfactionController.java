@@ -20,7 +20,7 @@ import java.util.List;
  * @Date 2021/3/25 16:32
  */
 @Controller
-@RequestMapping("/khSatisfaction")
+//@RequestMapping("/khSatisfaction")
 public class KhSatisfactionController {
     @Resource
     KhSatisfactionService khSatisfactionService;
@@ -31,14 +31,18 @@ public class KhSatisfactionController {
      * @param m
      * @return
      */
-    @GetMapping("/contact-list")
+    @GetMapping("/banner-list")
     public String getKhSatisfactionInfo(Integer jlId, ModelMap m){
         List<KhSatisfaction> khSatisfactions=khSatisfactionService.getSatisfactionByJlId(jlId);
         m.addAttribute("info",khSatisfactions);
         m.addAttribute("dataNum",khSatisfactions.size());
-        return "contact-list";
+        return "banner-list";
     }
-
+    //访问 添加客户服务列表页面页面
+    @RequestMapping("/banner-add")
+    public String banneradd(){
+        return "banner-add";
+    }
     /**
      * 删除客户服务记录
      * @param sId
