@@ -1,7 +1,9 @@
 package com.hqyj.controller;
+import com.hqyj.pojo.KhSer;
 import com.hqyj.pojo.UserInfo;
 import com.hqyj.pojo.kh;
 import com.hqyj.service.KhService;
+import com.hqyj.service.KhserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.annotation.Resource;
 import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,8 @@ public class KhController {
         khService.excelWrite(response);
     }
 
+    @Resource
+    KhserService khserService;
     //访问 添加客户列表页面页面
     @RequestMapping("/cate-add")
     public String cateadd(){
@@ -152,6 +157,45 @@ public class KhController {
         HashMap<String,Object> map=new HashMap<String,Object>();
         khService.add(kh);
         String info="添加成功";
+        String info=khService.del(kh);
+        map.put("info",info);
+        return map;
+    }
+
+    /**
+     *编辑联系人
+     * @param kh
+     * @return
+     */
+    @PostMapping("/linkMan/update")
+    public String update(kh kh){
+        return khService.updateLinkMan(kh);
+    }
+
+
+    //访问 添加客户服务日程页面
+    @RequestMapping("/banner-timeadd")
+    public String bannertimeadd(){
+        return "banner-timeadd";
+    }
+
+
+    //处理删除的ajax请求
+    @RequestMapping("/addKhser")
+    @ResponseBody
+    public HashMap<String,Object> addKhser(KhSer khSer){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=khserService.add(khSer);
+        map.put("info",info);
+        return map;
+    }
+
+    //处理删除的ajax请求
+    @RequestMapping("/delKhser")
+    @ResponseBody
+    public HashMap<String,Object> delKhser(KhSer khSer){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=khserService.delKhser(khSer);
         map.put("info",info);
         return map;
     }
