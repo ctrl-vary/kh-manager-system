@@ -123,4 +123,12 @@ public class KhServicelmpl implements KhService {
         return khDao.getKhByJl(jlId);
     }
 
+    @Override
+    public String updateLinkMan(kh kh) {
+        int num = khDao.updateLinkMan(kh);
+        if (num > 0) {
+            return "修改成功";
+        }
+        return "修改失败";
+    }
 }

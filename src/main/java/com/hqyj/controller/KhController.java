@@ -118,13 +118,12 @@ public class KhController {
     }
 
     /**
-     *
+     *编辑联系人
      * @param kh
      * @return
      */
     @PostMapping("/linkMan/update")
     public String update(kh kh){
-        khService.update(kh);
-        return khService.update(kh);
+        return khService.updateLinkMan(kh);
     }
 }

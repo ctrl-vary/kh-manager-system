@@ -24,5 +24,6 @@ public interface KhService {
     String del(kh kh);
 
     List<kh> getKhByJl(Integer jlId);
+    String updateLinkMan(kh kh);
 
 }

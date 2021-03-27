@@ -36,9 +36,13 @@ public interface KhDao {
     kh selectById(kh kh);
 
     //修改
-    @Update("update kh set name=#{name},gender=#{gender},url=#{url},phone=#{phone},email=#{email},bdate=#{bdate},edu=#{edu},idn=#{idn},region=#{region},company=#{company},managerid=#{managerid},manager=#{manager},tips=#{tips} where id=#{id}")
+    @Update("update kh set name=#{name},gender=#{gender},url=#{url}," +
+            "phone=#{phone},email=#{email},bdate=#{bdate},edu=#{edu}," +
+            "idn=#{idn},region=#{region},company=#{company},managerid=#{managerid}," +
+            "manager=#{manager},tips=#{tips} where id=#{id}")
     int update(kh kh);
-
+    @Update("update kh set name=#{name},gender=#{gender},phone=#{phone},email=#{email},region=#{region} where id=#{id}")
+    int updateLinkMan(kh kh);
     //删除
     @Delete("delete from kh where id=#{id}")
     int del(kh kh);
