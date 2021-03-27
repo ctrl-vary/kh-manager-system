@@ -435,6 +435,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo selectByUserId2(UserInfo user) {
+
         return userInfo_Copy1Dao.selectByUserId(user);
     }
 
@@ -472,6 +473,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         return "删除失败";
     }
 
+    @Override
+    public String delrecover(UserInfo user) {
+        int num=userInfo_Copy1Dao.delrecover(user);
+        if(num>0){
+            return "恢复成功";
+        }
+        return "恢复失败";
+    }
     @Override
     public String updatePwd(UserInfo user,HttpServletRequest request) {
         //取出存入session中的密码

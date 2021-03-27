@@ -1,7 +1,9 @@
 package com.hqyj.controller;
+import com.hqyj.pojo.KhSer;
 import com.hqyj.pojo.UserInfo;
 import com.hqyj.pojo.kh;
 import com.hqyj.service.KhService;
+import com.hqyj.service.KhserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -126,4 +128,33 @@ public class KhController {
     public String update(kh kh){
         return khService.updateLinkMan(kh);
     }
+
+
+    //访问 添加客户服务日程页面
+    @RequestMapping("/banner-timeadd")
+    public String bannertimeadd(){
+        return "banner-timeadd";
+    }
+
+
+    //处理删除的ajax请求
+    @RequestMapping("/addKhser")
+    @ResponseBody
+    public HashMap<String,Object> addKhser(KhSer khSer){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=khserService.add(khSer);
+        map.put("info",info);
+        return map;
+    }
+
+    //处理删除的ajax请求
+    @RequestMapping("/delKhser")
+    @ResponseBody
+    public HashMap<String,Object> delKhser(KhSer khSer){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        String info=khserService.delKhser(khSer);
+        map.put("info",info);
+        return map;
+    }
+
 }

@@ -182,12 +182,47 @@
 
             /*用户-恢复*/
             function member_recover(obj,id){
+                var id=$(obj).parent().parent().find("td").eq(1).text();
+                var name=$(obj).parent().parent().find("td").eq(2).text();
+                var email=$(obj).parent().parent().find("td").eq(3).text();
+
+
                 layer.confirm('确认要恢复吗？',function(index){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('已恢复!',{icon:1,time:1000});
-                });
-            }
+
+                    $.ajax({
+                        url: "/recover",
+                        type: "post",
+                        data:{"userId":id,"userName":name,"email":email},
+                        dataType: "json",//返回的数据类型
+                        success: function (data) {
+                            //如果注册成功就跳转到登录页面
+                            if (data.info=="恢复成功") {
+                                layer.alert("恢复成功",function (index) {
+
+                                    //关闭弹窗
+                                    // 获得frame索引
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    //关闭当前frame
+                                    parent.layer.close(index);
+                                    parent.location.reload();
+
+
+                                })
+                                return false;
+                            }
+                            else{
+                                layer.msg(data.info,{icon:5,time:2000});return false;
+                            }
+                        }
+                    })
+
+                })
+
+                }
+
             /*用户-彻底删除*/
             function member_unset(obj,id){
                 layer.confirm('彻底删除无法恢复，确认要删除数据吗？',function(index){
