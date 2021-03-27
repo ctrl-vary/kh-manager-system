@@ -14,9 +14,13 @@ import java.util.List;
 @Mapper
 public interface KhSatisfactionDao {
     //根据经理id获取客服记录
-    @Select("SELECT * FROM kh_satisfaction WHERE jl_id=#{jlId}")
+    @Select("SELECT id,kh_id as khId,kh_name as khName,link_man as linkMan," +
+            "time,cost,des,satisfaction,type " +
+            "FROM kh_satisfaction WHERE jl_id=#{jlId}")
     List<KhSatisfaction> getSatisfactionByJlId(Integer jlId);
-    @Select("SELECT * FROM kh_satisfaction WHERE id=#{sId}")
+    @Select("SELECT id,kh_id as khId,kh_name as khName,link_man as linkMan," +
+            "time,cost,des,satisfaction,type " +
+            " FROM kh_satisfaction WHERE id=#{sId}")
     KhSatisfaction getSatisfactionBysId(Integer sId);
     @Delete("DELETE FROM kh_satisfaction WHERE id=#{sId}")
     void delete(Integer sId);
