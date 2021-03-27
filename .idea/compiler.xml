@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="firsttest" />
-        <module name="kh-manager-system" />
         <module name="shiyou" />
+        <module name="kh-manager-system" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

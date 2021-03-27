@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface KhService {
+    //发送生日祝福方法（女）
+    public HashMap<String, Object> sendZf(kh kh, HttpServletRequest request);
+    //发送生日祝福方法（男）
+    public HashMap<String, Object> sendZf1(kh kh, HttpServletRequest request);
+    //excel方法
     public void excelWrite(HttpServletResponse response);
 
     //添加

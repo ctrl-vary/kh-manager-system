@@ -46,7 +46,7 @@
             <xblock>
                 <button class="layui-btn"  onclick="rule_add('添加','./rule-add','440','300')"><i class="layui-icon">&#xe608;</i>添加</button>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-                <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" >0</span> 条</span>
+                <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d"th:text="${dataNum}" >0</span> 条</span>
             </xblock>
             <table class="layui-table">
                 <thead>
@@ -97,9 +97,9 @@
                     </tr>
                 </tbody>
             </table>
-            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>
-            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>
-            <div id="page"></div>
+<!--            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>-->
+<!--            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>-->
+<!--            <div id="page"></div>-->
         </div>
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script src="./js/x-layui.js" charset="utf-8"></script>
@@ -111,15 +111,15 @@
               layer = layui.layer;//弹出层
               form = layui.form;//弹出层
 
-                //以上模块根据需要引入
-                laypage({
-                    cont: 'page'
-                    ,pages: 100
-                    ,first: 1
-                    ,last: 100
-                    ,prev: '<em><</em>'
-                    ,next: '<em>></em>'
-                });
+                // //以上模块根据需要引入
+                // laypage({
+                //     cont: 'page'
+                //     ,pages: 100
+                //     ,first: 1
+                //     ,last: 100
+                //     ,prev: '<em><</em>'
+                //     ,next: '<em>></em>'
+                // });
 
 
             })

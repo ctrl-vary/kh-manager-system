@@ -66,7 +66,7 @@ public class IndexController {
     public String show(){
         return "member-show";
     }
-    //访问用户个人资料页面
+
     @RequestMapping("/edit-password")
     public String epwd(){
         return "updatePwd";

@@ -3,6 +3,7 @@ import com.hqyj.pojo.UserInfo;
 import com.hqyj.pojo.kh;
 import com.hqyj.service.KhService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Console;
 import java.util.HashMap;
@@ -19,6 +21,9 @@ import java.util.List;
 public class KhController {
     @Autowired
     KhService khService;
+
+
+
     //excel导出
     @RequestMapping("/excelWrite")
     public void excelWrite(HttpServletResponse response){
@@ -79,6 +84,20 @@ public class KhController {
 //        //将查询条件回显
 //        m.put("vv",kh.getConValue());
         return "cate-birth";
+    }
+
+    //处理邮件发送的请求（女）
+    @RequestMapping("/sendEmail")
+    @ResponseBody
+    public HashMap<String,Object> sendEmail(kh kh, HttpServletRequest request){
+        return khService.sendZf(kh,request);
+    }
+
+    //处理邮件发送的请求
+    @RequestMapping("/sendEmail1")
+    @ResponseBody
+    public HashMap<String,Object> sendEmail1(kh kh, HttpServletRequest request){
+        return khService.sendZf(kh,request);
     }
 
     //处理添加客户请求

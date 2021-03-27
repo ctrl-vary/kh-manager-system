@@ -28,7 +28,7 @@
         <button class="layui-btn"  style="background: #ff961d" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="role_add('添加','./role-add','600','440')"><i class="layui-icon"></i>添加</button>
         <input type="file"  id="excelInput" accept=".xlsx,.xlsb,.xlsm,.xls,.xml" class="layui-btn" onclick="chaneAction()" style="text-decoration:none"\>
-        <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span  id="dataNum" class="layui-badge" style="background: #ff961d" th:value="${dataNum}" >0</span> 条</span></xblock>
+        <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">共有数据：<span  id="dataNum" class="layui-badge" style="background: #ff961d" th:text="${dataNum}" >0</span> 条</span></xblock>
     </xblock>
     <table class="layui-table">
         <thead>

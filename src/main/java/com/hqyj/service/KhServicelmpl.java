@@ -9,15 +9,21 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -28,6 +34,13 @@ public class KhServicelmpl implements KhService {
 
     @Autowired
     RedisTemplate<String,Object> redisTemplate;
+
+    //获取发件人邮箱
+    @Value("${spring.mail.username}")
+    String sendEmail;
+    //创建发送邮件的对象
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Override
     public String add(com.hqyj.pojo.kh kh) {
@@ -265,6 +278,82 @@ public class KhServicelmpl implements KhService {
             }
         }
 
+    }
+
+    @Override
+    public HashMap<String, Object> sendZf1(kh kh, HttpServletRequest request) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        try {
+//            //从session中获取当前用户信息
+//            HttpSession session = request.getSession();
+            //创建普通邮件对象
+            SimpleMailMessage message = new SimpleMailMessage();
+            //设置发件人邮箱
+            message.setFrom(sendEmail);
+            //设置收件人邮箱
+            message.setTo(kh.getEmail());
+            //设置邮件标题
+            message.setSubject("桔子有限公司-生日祝福");
+//            // 生成随机验证码
+//            Random rd = new Random();
+//            String valCode = rd.nextInt(9999)+"";
+            //设置邮件正文
+            message.setText("尊敬的"+kh.getName()+"女士:" +
+                    " 感谢事业路上有您的帮助，桔子有限公司真挚祝福您生日快乐，祝您事业一帆风顺，好运接二连三，财运五湖四海，智慧六出奇计，才学七步成章，做事八面玲珑，地位九五至尊，诸事十全十美！");
+            //发送邮件
+            javaMailSender.send(message);
+            //发送成功
+//            //把验证码存入session中
+//            session.setAttribute("valCode",valCode);
+//            session.setAttribute("name",userInfoDao.selectByEmail(user));
+
+            map.put("info","发送成功");
+            return map;
+
+        } catch (Exception e) {
+            System.out.println("发送邮件时发生异常！");
+            e.printStackTrace();
+        }
+        map.put("info","发送邮件异常");
+        return map;
+    }
+    public HashMap<String, Object> sendZf(kh kh, HttpServletRequest request) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        try {
+//            //从session中获取当前用户信息
+//            HttpSession session = request.getSession();
+            //创建普通邮件对象
+            SimpleMailMessage message = new SimpleMailMessage();
+            //设置发件人邮箱
+            message.setFrom(sendEmail);
+            //设置收件人邮箱
+            message.setTo(kh.getEmail());
+            //设置邮件标题
+            message.setSubject("桔子有限公司-生日祝福");
+//            // 生成随机验证码
+//            Random rd = new Random();
+//            String valCode = rd.nextInt(9999)+"";
+            //设置邮件正文
+            message.setText("尊敬的"+kh.getName()+"先生:" +
+                    " 感谢事业路上有您的帮助，桔子有限公司真挚祝福您生日快乐，祝您事业一帆风顺，好运接二连三，财运五湖四海，智慧六出奇计，才学七步成章，做事八面玲珑，地位九五至尊，诸事十全十美！");
+            //发送邮件
+            javaMailSender.send(message);
+            //发送成功
+//            //把验证码存入session中
+//            session.setAttribute("valCode",valCode);
+//            session.setAttribute("name",userInfoDao.selectByEmail(user));
+
+            map.put("info","发送成功");
+            return map;
+
+        } catch (Exception e) {
+            System.out.println("发送邮件时发生异常！");
+            e.printStackTrace();
+        }
+        map.put("info","发送邮件异常");
+        return map;
     }
 
 }
