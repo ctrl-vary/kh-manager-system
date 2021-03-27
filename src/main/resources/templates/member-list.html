@@ -92,7 +92,7 @@
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="member_del(this)"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
@@ -265,6 +265,7 @@
             }
             /*用户-删除*/
             function member_del(obj){
+                console.log("del")
                 var id=$(obj).parent().parent().find("td").eq(1).text();
                 var name=$(obj).parent().parent().find("td").eq(2).text();
                 var email=$(obj).parent().parent().find("td").eq(3).text();
@@ -272,25 +273,27 @@
                 var jT=$(obj).parent().parent().find("td").eq(5).text();
 
                 layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
-                    //发异步删除数据
+                    $.ajax({
+                        url:"/delMember",
+                        type:"get",
+                        data:{"userId":id,"userName":name,"email":email,"js":js,"joinTime":jT},
+                        dataType:"json",
+                        success:function (data) {
+                            // layer.alert(data.info)
+                            if(data.info=="删除成功"){
+
+                                window.location.reload();
+                                $(obj).parent().parent().remove();
+
+                            }
+                        }
+                    })
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!',{icon:1,time:1000});
+
+
                 });
-                $.ajax({
-                    url:"/delMember",
-                    type:"get",
-                    data:{"userId":id,"userName":name,"email":email,"js":js,"joinTime":jT},
-                    dataType:"json",
-                    success:function (data) {
-                        layer.alert(data.info)
-                        if(data.info=="删除成功"){
 
-                            window.location.reload();
-                            $(obj).parent().parent().remove();
-
-                        }
-                    }
-                })
             }
             </script>
             

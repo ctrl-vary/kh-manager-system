@@ -45,7 +45,7 @@
             <xblock>
 
                 <button class="layui-btn layui-btn-danger" onclick="recoverAll()"><i class="layui-icon">&#xe640;</i>批量恢复</button>
-                <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" >0</span>  条</span>
+                <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge" style="background: #ff961d" th:text="${info.total}" >0</span>  条</span>
             </xblock>
             <table class="layui-table">
                 <thead>
@@ -96,9 +96,11 @@
                 </tbody>
             </table>
 
-            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>
-            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>
-            <div id="page"></div>
+            <a id="pre" class="layui-btn" th:href="@{/member-del(page=${info.pre})}">上一页</a>
+            <a id="next" class="layui-btn" th:href="@{/member-del(page=${info.next})}">下一页</a>
+            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" th:text="${info.totalPage}">0</span> 页</span>
+            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="${info.cur}">0</span> 页</span>
+<!--            <div id="page"></div>-->
         </div>
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script src="./js/x-layui.js" charset="utf-8"></script>
@@ -110,17 +112,17 @@
               laypage = layui.laypage;//分页
               layer = layui.layer;//弹出层
 
-              //以上模块根据需要引入
-
-              laypage({
-                cont: 'page'
-                ,pages: 100
-                ,first: 1
-                ,last: 100
-                ,prev: '<em><</em>'
-                ,next: '<em>></em>'
-              }); 
-              
+              // //以上模块根据需要引入
+              //
+              // laypage({
+              //   cont: 'page'
+              //   ,pages: 100
+              //   ,first: 1
+              //   ,last: 100
+              //   ,prev: '<em><</em>'
+              //   ,next: '<em>></em>'
+              // });
+              //
               var start = {
                 min: laydate.now()
                 ,max: '2099-06-16 23:59:59'
