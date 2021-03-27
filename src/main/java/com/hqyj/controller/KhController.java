@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,8 @@ import java.util.List;
 public class KhController {
     @Autowired
     KhService khService;
-
+    @Resource
+    KhserService khserService;
     //访问 添加客户列表页面页面
     @RequestMapping("/cate-add")
     public String cateadd(){
