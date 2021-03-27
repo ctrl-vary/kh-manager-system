@@ -84,7 +84,7 @@
                 <a style="text-decoration:none" onclick="admin_stop(this,'10001')" href="javascript:;" title="停用">
                     <i class="layui-icon">&#xe601;</i>
                 </a>
-                <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','./admin-edit','380','440')"
+                <a title="编辑" href="javascript:;" onclick="update(this)"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -156,6 +156,15 @@
         }
 
     });
+
+
+    //打开修改页面方法
+    function update(obj) {
+        //获取当前选中行得userId值
+        var id=$(obj).parent().parent().find("td").eq(1).text();
+        //打开弹窗
+        x_admin_show("修改","/admin-edit?userId="+id,360,400);
+    }
     function num1(){
         console.log("num1")
         var a1 = document.getElementsByName("a1")[0].checked;
@@ -265,13 +274,7 @@
             layer.msg('已启用!',{icon: 6,time:1000});
         });
     }
-    //编辑
-    function admin_edit (title,url,w,h) {
-        //获取当前选中行得userId值
-      /*  var id=$(obj).parent().parent().find("td").eq(1).text();
-        x_admin_show("修改","/admin-edit?userId="+id,500,500)*/
-        x_admin_show(title,url,w,h);
-    }
+
     /*删除*/
     function admin_del(obj){
         var id=$(obj).parent().parent().find("td").eq(1).text();

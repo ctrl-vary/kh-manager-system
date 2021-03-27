@@ -35,6 +35,7 @@ public class KhSatisfactionController {
     public String getKhSatisfactionInfo(Integer jlId, ModelMap m){
         List<KhSatisfaction> khSatisfactions=khSatisfactionService.getSatisfactionByJlId(jlId);
         m.addAttribute("info",khSatisfactions);
+        System.out.println(khSatisfactions+"list----------------------------");
         m.addAttribute("dataNum",khSatisfactions.size());
         return "banner-list";
     }

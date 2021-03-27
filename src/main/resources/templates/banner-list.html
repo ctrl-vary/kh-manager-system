@@ -52,7 +52,7 @@
         <button class="layui-btn" onclick="banner_add('添加栏目','./banner-add','1180','770')"><i class="layui-icon"></i>添加</button>
         <input type="file"  id="excelInput" accept=".xlsx,.xlsb,.xlsm,.xls,.xml" class="layui-btn" onclick="chaneAction()" style="text-decoration:none"/>
         <button type="button" id="export-table" class="layui-btn" onclick="exportAction()" style="text-decoration:none"><img src="./img/daochu.png" style="width: 20px;height: 20px">导出到excel</button> <span class="x-right" style="line-height:40px">
-                共有数据：<span class="layui-badge" style="background: #ff961d" th:text="10">0</span> 条</span>
+                共有数据：<span class="layui-badge" style="background: #ff961d" >0</span> 条</span>
     </xblock>
     <table class="layui-table" id="out-table">
         <thead>
@@ -63,7 +63,7 @@
             <th> 服务类型 </th>
             <th> 服务日期 </th>
             <th> 客户名称 </th>
-            <th> 联系人 </th>
+<!--            <th> 联系人 </th>-->
             <th> 预估成本 </th>
             <th> 内容描述 </th>
             <th> 客户满意度 </th>
@@ -72,17 +72,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
+        <tr th:each="i:${info}">
             <td>
-                <input type="checkbox" th:value="${i.id}" name="num" onclick="num2()">
+                <input type="checkbox"  name="num" onclick="num2()">
             </td>
-            <td th:text="解决客户投诉"> 服务类型 </td>
-            <td th:text="2020年11月3日"> 服务日期</td>
-            <td th:text="张三"> 客户名称 </td>
-            <td th:text="1872344566"> 联系人 </td>
-            <td th:text="1000"> 预估成本 </td>
-            <td th:text="解决客户投诉问题"> 内容描述 </td>
-            <td th:text="很满意"> 客户满意度 </td>
+            <td th:text="${i.type}"> 服务类型 </td>
+            <td th:text="${i.time}"> 服务日期</td>
+            <td th:text="${i.khName}"> 客户名称 </td>
+<!--            <td th:text="${i.id}"> 联系人 </td>-->
+            <td th:text="${i.cost}"> 预估成本 </td>
+            <td th:text="${i.des}"> 内容描述 </td>
+            <td th:text="${i.satisfaction}"> 客户满意度 </td>
 
 
             <td class="td-manage">
@@ -101,8 +101,8 @@
     <div id="page">
         <a id="pre" class="layui-btn" >上一页</a>
         <a id="next" class="layui-btn" >下一页</a>
-        <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" th:text="3">0</span> 页</span>
-        <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="1">0</span> 页</span>
+<!--        <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" th:text="3">0</span> 页</span>-->
+<!--        <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="1">0</span> 页</span>-->
 
     </div>
 

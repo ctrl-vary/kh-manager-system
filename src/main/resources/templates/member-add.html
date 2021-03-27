@@ -47,7 +47,7 @@
     </div>
     <div class="layui-form-item">
       <label for="L_repass" class="layui-form-label"> </label>
-      <button  class="layui-btn" lay-filter="add" onclick="add()"> 增加 </button>
+      <button  class="layui-btn"  onclick="add()"> 增加 </button>
     </div>
   </form>
 </div>
@@ -55,6 +55,7 @@
 </script>
 <script src="./js/x-layui.js" charset="utf-8">
 </script>
+<script src="./js/jquery-3.2.1.min.js"></script>
 <script>
   layui.use(['form','layer'], function(){
     $ = layui.jquery;
@@ -98,7 +99,7 @@
 
     if(name==""||email==""||pwd=="")
     {
-      layer.msg('用户基本信息不能为空！',{icon:5,time:2000});return false;
+      layer.msg('基本信息不能为空！',{icon:5,time:2000});return false;
     }
     else{
       //发送 ajax请求

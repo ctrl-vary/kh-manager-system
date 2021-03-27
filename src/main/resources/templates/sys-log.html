@@ -75,27 +75,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="i:${info.data}">
                         <td>
                             <input type="checkbox"  name="num" onclick="num2()">
                         </td>
-                        <td>
+                        <td th:text="${i.id}">
                             12
                         </td>
 
-                        <td>
+                        <td  th:text="${i.content}">
                             登录成功!
                         </td>
-                        <td>
+                        <td th:text="${i.userName}">
                             xs
                         </td>
-                        <td>
+                        <td th:text="${i.role}">
                             用户经理
                         </td>
-                        <td >
+                        <td  th:text="${i.ip}">
                             192.168.43.39
                         </td>
-                        <td >
+                        <td  th:text="${i.time}">
                              2021-01-01 11:11:42
                         </td>
                         <td class="td-manage">
@@ -107,9 +107,9 @@
                     </tr>
                 </tbody>
             </table>
-            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>
-            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>
-             <div id="page"></div>
+<!--            <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d">0</span> 页</span>-->
+<!--            <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" >0</span> 页</span>-->
+<!--             <div id="page"></div>-->
         </div>
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script src="./js/x-layui.js" charset="utf-8"></script>
@@ -136,7 +136,7 @@
            
 			//起始日期
 			var start = {
-                min: laydate.now()
+                min: '1699-06-16 23:59:59'
                 ,max: '2099-06-16 23:59:59'
                 ,istoday: false
                 ,choose: function(datas){
@@ -146,7 +146,7 @@
               };
               
               var end = {
-                min: laydate.now()
+                min:'1699-06-16 23:59:59'
                 ,max: '2099-06-16 23:59:59'
                 ,istoday: false
                 ,choose: function(datas){

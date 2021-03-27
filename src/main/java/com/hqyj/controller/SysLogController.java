@@ -20,7 +20,7 @@ import java.util.List;
  * @Date 2021/3/26 22:21
  */
 @Controller
-@RequestMapping("/sys")
+//@RequestMapping("/sys")
 public class SysLogController {
     @Resource
     SysLogService sysLogService;
@@ -45,6 +45,7 @@ public class SysLogController {
     @GetMapping("/sys-log")
     public String getInfo(ModelMap m,Integer pageNum){
         HashMap<String,Object> hashMap=sysLogService.getSysLog(pageNum);
+        System.out.println(hashMap+"hashMap++++++++++++++++++");
         m.addAttribute("info",hashMap);
         return "sys-log";
     }
