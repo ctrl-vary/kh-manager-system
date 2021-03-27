@@ -3,6 +3,7 @@ package com.hqyj.test;
 import com.hqyj.dao.KhSatisfactionDao;
 import com.hqyj.pojo.KhSatisfaction;
 import com.hqyj.pojo.Satisfaction;
+import com.hqyj.service.SysLogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,8 @@ import javax.annotation.Resource;
 public class SatisficationTest {
     @Resource
     KhSatisfactionDao khSatisfactionDao;
+    @Resource
+    SysLogService sysLogService;
     @Test
     public void test1(){
         KhSatisfaction khSatisfaction=new KhSatisfaction();
@@ -50,5 +53,10 @@ public class SatisficationTest {
     @Test
     public void test4(){
         System.out.println(khSatisfactionDao.getSatisfactionByJlId(2));
+    }
+    @Test
+    public void test5(){
+        System.out.println(sysLogService.getSysLog(1).toString());
+
     }
 }

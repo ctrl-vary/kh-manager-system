@@ -47,7 +47,7 @@ public interface AuthDao {
     @Select("SELECT * FROM permission WHERE id=#{pId}")
     Permission getPermissionById(Integer pId);
     //更新角色
-    @Update("UPDATE permission set name=#{name},rule=#{rule} WHERE id={id}")
+    @Update("UPDATE permission set name=#{name},rule=#{rule} WHERE id=#{id}")
     void updatePermission(Permission p);
     //根据权限查找所属角色
     @Select("SELECT role.id as id,role.name as name " +
