@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        后台管理系统
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="./css/x-admin.css" media="all">
+</head>
+
+<body>
+<div class="x-body" >
+    <form class="layui-form" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>权限名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required" th:value="${info.name}"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>权限规则
+            </label>
+            <div class="layui-input-block">
+                <textarea  th:value="${info.rule}" name="rule" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+<input id="id" type="hidden" name="id"  th:value="${info.id}" >
+        <div class="layui-form-item" style="width: 64px;height: 38px"  onclick="update()" >
+            <button class="layui-btn"  type="button">
+                修改
+            </button>
+        </div>
+
+
+
+
+
+    </form>
+</div>
+
+<script src="./lib/layui/layui.js" charset="utf-8">
+</script>
+<script src="./js/x-layui.js" charset="utf-8">
+</script>
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script>
+    layui.use(['laydate','element','layer','form'], function(){
+        $ = layui.jquery;
+        laydate = layui.laydate,//日期插件
+            form = layui.form
+            ,layer = layui.layer;
+
+
+    });
+    $(document).ready(function () {
+        var name=$("input[name='name']").val();
+        var rule=$("textarea[name='rule']").val();
+        var id=$("input[name='id']").val();
+        console.log(name);
+        console.log(rule);
+        console.log(id);
+    })
+
+    //修改
+
+    function update() {
+
+
+        var name=$("input[name='name']").val();
+        var rule=$("textarea[name='rule']").val();
+        var id=$("input[name='id']").val();
+        if(name==""||rule=="")
+        {
+            layer.msg('必填项不能为空！',{icon:5,time:2000});return false;
+        }
+        else{
+            //发送 ajax请求
+            $.ajax({
+                url: "/updatePermission",
+                type: "post",
+                data:{"name":name,"rule":rule,"id":id},
+                dataType: "json",//返回的数据类型
+                success: function (data) {
+                    //如果注册成功就跳转到登录页面
+                    if (data.info=="修改成功") {
+                        layer.alert("修改成功",function (index) {
+
+                            //关闭弹窗
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            parent.location.reload();
+
+
+                        })
+                        return false;
+                    }
+                    else{
+
+                        layer.msg(data.info,{icon:5,time:2000});return false;
+                    }
+                }
+            })
+
+        }}
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
