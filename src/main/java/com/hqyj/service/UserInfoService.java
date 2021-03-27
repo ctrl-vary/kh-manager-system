@@ -63,6 +63,8 @@ public interface UserInfoService {
 
     //删除
     String delAll(UserInfo user);
+    //删除
+    String delrecover(UserInfo user);
 
 }
 

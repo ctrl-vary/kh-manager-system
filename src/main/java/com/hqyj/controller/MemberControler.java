@@ -101,6 +101,31 @@ public class MemberControler {
         return map;
     }
 
+    //处理添加客户请求
+    @RequestMapping("/recover")
+    @ResponseBody
+    public HashMap<String,Object> recoverMember(UserInfo user){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        //访问注册方法
+        //自动生成一个盐值
+        Random rd=new Random();
+        String salt=rd.nextInt(10000)+"";
+
+        Date date = new java.sql.Date(new java.util.Date().getTime());
+        //加密用户输入的密码
+        String pwd = mdfive.encrypt("123456",salt);
+        //把加过密码的传到数据层中
+        user.setUserPwd(pwd);
+        //存入盐值
+        user.setSalt(salt);
+        user.setJoinTime(date);
+        user.setJs("客户经理");
+        String info1 = userInfoService.addMember(user);
+        String info = userInfoService.delrecover(user);
+        map.put("info",info);
+        return map;
+    }
+
     //访问 密码修改的页面
     @RequestMapping("/member-password")
     public String memberpassword(UserInfo user, ModelMap m){

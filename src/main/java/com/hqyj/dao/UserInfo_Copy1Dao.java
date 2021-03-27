@@ -1,6 +1,7 @@
 package com.hqyj.dao;
 
 import com.hqyj.pojo.UserInfo;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,8 @@ public interface UserInfo_Copy1Dao {
     //分页查询
     @Select("select * from UserInfo_copy1")
     List<UserInfo> select(UserInfo user);
+
+    //删除
+    @Delete("delete from UserInfo_copy1 where userId=#{userId}")
+    int delrecover(UserInfo user);
 }
