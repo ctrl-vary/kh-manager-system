@@ -47,6 +47,7 @@ public class SysLogController {
         HashMap<String,Object> hashMap=sysLogService.getSysLog(pageNum);
         System.out.println(hashMap+"hashMap++++++++++++++++++");
         m.addAttribute("info",hashMap);
+        m.addAttribute("pageNum",pageNum);
         return "sys-log";
     }
 

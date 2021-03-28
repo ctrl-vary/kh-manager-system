@@ -146,6 +146,16 @@ public class KhController {
     public String contactdd(){
         return "contact-add";
     }
+
+    @RequestMapping("/contact-edit")
+    public String contactedit(kh kh1,ModelMap m){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        System.out.println(kh1.getId());
+         kh kh= khService.selectById(kh1);
+         m.addAttribute("kh",kh);
+        return "contact-edit";
+    }
+
     /**
      * 添加联系人
      * @param kh
@@ -167,9 +177,17 @@ public class KhController {
      * @param kh
      * @return
      */
-    @PostMapping("/linkMan/update")
-    public String update(kh kh){
-        return khService.updateLinkMan(kh);
+//    @PostMapping("/linkMan/update")
+//    public String update(kh kh){
+//        return khService.updateLinkMan(kh);
+//    }
+    @PostMapping("/contactUpdate")
+    @ResponseBody
+    public HashMap<String,Object> contactUpdate(kh kh){
+        HashMap<String,Object> map = new HashMap<String, Object>();
+        String info = khService.update(kh);
+        map.put("info",info);
+        return map;
     }
 
 

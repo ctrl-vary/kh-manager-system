@@ -108,10 +108,10 @@
                 </tbody>
             </table>
             <div id="page">
-                <a id="pre" class="layui-btn" th:href="@{/sys-log(pageNum=${info.page-1})}">上一页</a>
-                <a id="next" class="layui-btn" th:href="@{/sys-log(pageNum=${info.page+1})}">下一页</a>
+                <a id="pre" class="layui-btn" th:href="@{/sys-log(pageNum=${pageNum-1})}">上一页</a>
+                <a id="next" class="layui-btn" th:href="@{/sys-log(pageNum=${pageNum+1})}">下一页</a>
                 <span class="x-right" style="line-height:40px;margin-left: 100px">共有：<span class="layui-badge" style="background: #ff961d" th:text="${info.data.pages}">0</span> 页</span>
-                <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="${info.page}">0</span> 页</span>
+                <span class="x-right" style="line-height:40px">当前页：第<span class="layui-badge" style="background: #ff961d" th:text="${pageNum}">0</span> 页</span>
             </div>
 
         </div>

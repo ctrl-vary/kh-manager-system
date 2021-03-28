@@ -27,9 +27,12 @@ public interface KhSatisfactionDao {
     @Insert("INSERT INTO " +
             "kh_satisfaction(kh_id,jl_id,kh_name,link_man,time,cost,satisfaction,type,des) " +
             "value(#{khId},#{jlId},#{khName},#{linkMan},#{time},#{cost},#{satisfaction},#{type},#{des})")
-    void insert(KhSatisfaction khSatisfaction);
-    @Update("UPDATE kh_satisfaction set kh_id=#{khId},kh_name=#{khName},link_man=#{linkMan}," +
-            "time=#{time},cost=#{cost},satisfaction=#{satisfaction},type=#{type},des=#{des} " +
-            "WHERE jl_id=#{jlId}")
-    void update(KhSatisfaction khSatisfaction);
+    int insert(KhSatisfaction khSatisfaction);
+//    @Update("UPDATE kh_satisfaction set kh_id=#{khId},kh_name=#{khName},link_man=#{linkMan}," +
+//            "time=#{time},cost=#{cost},satisfaction=#{satisfaction},type=#{type},des=#{des} " +
+//            "WHERE jl_id=#{jlId}")
+@Update("UPDATE kh_satisfaction set kh_id=#{khId},kh_name=#{khName},link_man=#{linkMan}," +
+        "time=#{time},cost=#{cost},satisfaction=#{satisfaction},type=#{type},des=#{des} " +
+        "WHERE id=#{id}")
+    int update(KhSatisfaction khSatisfaction);
 }

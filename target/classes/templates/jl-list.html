@@ -218,8 +218,8 @@
         var id=$(obj).parent().parent().find("td").eq(1).text();
         layer.confirm("你确定要删除吗？",{icon:3,title:"警告"},function (index) {
             $.ajax({
-                url:"/del",
-                type:"get",
+                url:"/jl-del",
+                type:"post",
                 data:{"managerid":id},
                 dataType:"json",
                 success:function (data) {

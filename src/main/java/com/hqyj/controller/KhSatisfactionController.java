@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -61,9 +62,12 @@ public class KhSatisfactionController {
      * @return
      */
     @PostMapping("/insertKhSatisfaction")
-    public String insertKhSatisfaction(KhSatisfaction khSatisfaction){
-        khSatisfactionService.insert(khSatisfaction);
-        return "添加成功";
+    @ResponseBody
+    public HashMap<String,Object> insertKhSatisfaction(KhSatisfaction khSatisfaction){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        String info = khSatisfactionService.insert(khSatisfaction);
+        map.put("info",info);
+        return map;
     }
 
     /**
@@ -72,21 +76,24 @@ public class KhSatisfactionController {
      * @return
      */
     @PostMapping("/updateKhSatisfaction")
-    public String updateKhSatisfaction(KhSatisfaction khSatisfaction){
-        khSatisfactionService.update(khSatisfaction);
-        return "更新成功";
+    @ResponseBody
+    public HashMap<String,Object> updateKhSatisfaction(KhSatisfaction khSatisfaction){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        String info = khSatisfactionService.update(khSatisfaction);
+        map.put("info",info);
+        return map;
     }
     /**
      * 获取编辑信息
      * @param sId
      * @return
      */
-    @GetMapping("/getEditInfo")
-    public HashMap<String,Object> getEditInfo(Integer sId){
+    @GetMapping("/banner-edit")
+    public String getEditInfo(Integer sId,ModelMap m){
         HashMap<String,Object> hashMap=new HashMap<>();
        KhSatisfaction khSatisfaction= khSatisfactionService
                .getSatisfactionBysId(sId);
-       hashMap.put("info",khSatisfaction);
-        return hashMap;
+       m.addAttribute("kh",khSatisfaction);
+        return "banner-edit";
     }
 }

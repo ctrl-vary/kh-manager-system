@@ -32,13 +32,26 @@ public class KhSatisfactionServiceImp implements KhSatisfactionService{
     }
 
     @Override
-    public void insert(KhSatisfaction khSatisfaction) {
-        khSatisfactionDao.insert(khSatisfaction);
+    public String insert(KhSatisfaction khSatisfaction) {
+
+        int num = khSatisfactionDao.insert(khSatisfaction);
+        if (num>0){
+            return "添加成功";
+        }
+        return "添加失败";
     }
 
     @Override
-    public void update(KhSatisfaction khSatisfaction) {
-        khSatisfactionDao.update(khSatisfaction);
+//    public void update(KhSatisfaction khSatisfaction) {
+//
+//        khSatisfactionDao.update(khSatisfaction);
+//    }
+    public String update(KhSatisfaction khSatisfaction) {
+        int num;
+        num = khSatisfactionDao.update(khSatisfaction);
+        if (num>0)
+            return "修改成功";
+        return "修改失败";
     }
 
     @Override

@@ -60,6 +60,8 @@
             <th>
                 <input type="checkbox" id="aaa" name="aaa" value="1" onclick="num1()">
             </th>
+
+            <th>编号</th>
             <th> 服务类型 </th>
             <th> 服务日期 </th>
             <th> 客户名称 </th>
@@ -76,6 +78,7 @@
             <td>
                 <input type="checkbox"  name="num" onclick="num2()">
             </td>
+            <td th:text="${i.id}"> 服务类型 </td>
             <td th:text="${i.type}"> 服务类型 </td>
             <td th:text="${i.time}"> 服务日期</td>
             <td th:text="${i.khName}"> 客户名称 </td>
@@ -146,7 +149,7 @@
         //获取当前选中行得userId值
         var id=$(obj).parent().parent().find("td").eq(1).text();
         //打开弹窗
-        x_admin_show("修改","/contact-edit?userId=",500,500)
+        x_admin_show("修改","/banner-edit?sId="+id,400,500)
     }
 
     /*-删除*/

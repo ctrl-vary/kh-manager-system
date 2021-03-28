@@ -57,7 +57,7 @@
                     <!--                    </div>-->
                     <div class="layui-form-item">
                         <label class="layui-form-label">
-                            <span class='x-red'>*</span>客户名称
+                            <span class='x-red'>*</span>姓名
                         </label>
                         <div class="layui-input-block">
                             <input type="text" name="name" autocomplete="off"
@@ -82,32 +82,32 @@
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">
-                            <span class='x-red'>*</span>客户电话
+                            <span class='x-red'>*</span>联系电话
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" name="idn" autocomplete="off"
-                                   class="layui-input">
+                            <input type="text" name="phone" autocomplete="off"
+                                   class="layui-input" lay-verify="phone">
                         </div>
                     </div>
 
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            <span class='x-red'>*</span>地址
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="phone" value="" autocomplete="off"
-                                   class="layui-input">
-                        </div>
-                    </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">-->
+<!--                            <span class='x-red'>*</span>地址-->
+<!--                        </label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="text" name="phone" value="" autocomplete="off"-->
+<!--                                   class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">
-                            <span class='x-red'>*</span>邮箱
+                            <span class='x-red'>*</span>邮箱地址
                         </label>
                         <div class="layui-input-block">
                             <input type="text" name="email" value="" autocomplete="off" placeholder="输入请符合邮箱格式"
-                                   class="layui-input">
+                                   class="layui-input" lay-verify="email">
                         </div>
                     </div>
 
@@ -119,8 +119,32 @@
                     </div>
 
                     <div class="layui-form-item">
+                        <label class="layui-form-label"><span class='x-red'>*</span>学历</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="控制在20个字、40个字节以内" id="edu" name="edu">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class='x-red'>*</span>身份证号码</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" placeholder="请输入身份证号码" id="idn" name="idn">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
                         <label class="layui-form-label">
-                            <span class='x-red'>*</span>工作单位
+                            <span class='x-red'>*</span>所属地区
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="text" name="region" value="" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">
+                            <span class='x-red'>*</span>客户单位
                         </label>
                         <div class="layui-input-block">
                             <input type="text" name="company" value="" autocomplete="off"
@@ -188,25 +212,27 @@
 
 
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            所属地区
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="region" autocomplete="off" placeholder="控制在20个字、40个字节以内"
-                                   class="layui-input">
-                        </div>
-                    </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">-->
+<!--                            所属地区-->
+<!--                        </label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="text" name="region" autocomplete="off" placeholder="控制在20个字、40个字节以内"-->
+<!--                                   class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            学历
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="edu" autocomplete="off" placeholder="控制在20个字、40个字节以内"
-                                   class="layui-input">
-                        </div>
-                    </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">-->
+<!--                            学历-->
+<!--                        </label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="text" name="edu" autocomplete="off" placeholder="控制在20个字、40个字节以内"-->
+<!--                                   class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">
                             备注
@@ -273,7 +299,7 @@
     <script>
         //按钮提交
         function submit() {
-            layer.msg("添加失败",{icon:5,time:2000});
+            // layer.msg("添加失败",{icon:5,time:2000});
             // form.on('submit(add)', function(data){
             var name=$("input[name='name']").val();
             var url=$("input[name='url']").val();
@@ -311,7 +337,8 @@
                 }
                 $.ajax({
                     type:"post",
-                    url:"/addLinkMan",
+                    // url:"/addLinkMan",
+                    url:"/addKh",
                     data:{"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
                     dataType:"json",
                     success:function(data)

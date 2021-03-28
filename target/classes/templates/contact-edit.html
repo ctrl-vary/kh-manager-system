@@ -18,9 +18,20 @@
 <body>
 <div class="x-body" >
     <form class="layui-form" method="post" enctype="multipart/form-data">
+
+        <div class="layui-form-item">
+            <label for="khId" class="layui-form-label">
+                <span class="x-red">*</span>编号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="khId" name="id" required="" lay-verify="required" th:value="${kh.id}"
+                       autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label for="name" class="layui-form-label">
-                <span class="x-red">*</span>客户姓名
+                <span class="x-red">*</span>姓名
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="name" name="name" required="" lay-verify="required" th:value="${kh.name}"
@@ -41,16 +52,6 @@
                 <div class="layui-unselect layui-form-radio"  style="font-size: 14px"><i class="layui-anim layui-icon"></i>
                     <div>女</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="idn" class="layui-form-label">
-                <span class="x-red">*</span>身份证号码
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="idn" th:value="${kh.idn}" name="idn" required="" lay-verify="identity"
-                       autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -82,6 +83,37 @@
         </div>
 
         <div class="layui-form-item">
+            <label for="edu" class="layui-form-label">
+                学历
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="edu" name="edu" required="" lay-verify=""
+                       autocomplete="off" class="layui-input" th:value="${kh.edu}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="idn" class="layui-form-label">
+                <span class="x-red">*</span>身份证号码
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="idn" th:value="${kh.idn}" name="idn" required="" lay-verify="identity"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="edu" class="layui-form-label">
+                所属地区
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="region" name="region" required="" lay-verify=""
+                       autocomplete="off" class="layui-input" th:value="${kh.region}">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
             <label for="company" class="layui-form-label">
                 <span class="x-red">*</span>客户单位
             </label>
@@ -107,25 +139,7 @@
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label for="edu" class="layui-form-label">
-                所属地区
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="region" name="region" required="" lay-verify=""
-                       autocomplete="off" class="layui-input" th:value="${kh.region}">
-            </div>
-        </div>
 
-        <div class="layui-form-item">
-            <label for="edu" class="layui-form-label">
-                学历
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="edu" name="edu" required="" lay-verify=""
-                       autocomplete="off" class="layui-input" th:value="${kh.edu}">
-            </div>
-        </div>
 
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">
@@ -133,6 +147,26 @@
             </label>
             <div class="layui-input-block">
                 <textarea  th:value="${kh.tips}" name="tips" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="company" class="layui-form-label">
+                <span class="x-red">*</span>经理id
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="managerid" name="managerid" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" th:value="${kh.managerid}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="company" class="layui-form-label">
+                <span class="x-red">*</span>经理
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="manager" name="manager" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" th:value="${kh.manager}">
             </div>
         </div>
 
@@ -146,7 +180,6 @@
 
         <input type="hidden" name="id" id="id"  th:value="${kh.id}">
         <input type="hidden" name="gender" id="gender"  th:value="${kh.gender}">
-
 
     </form>
 </div>
@@ -193,20 +226,22 @@
     //     console.log(data);
     function update() {
 
+        var id=$("input[name='id']").val();
         var name=$("input[name='name']").val();
-        var url=$("input[name='url']").val();
-        var idn=$("input[name='idn']").val();
-        var company=$("input[name='company']").val();
-        var managerid=1;
-        var manager='李文';
+        var gender=$("input[name='gender']:checked").val();
         var phone=$("input[name='phone']").val();
         var email=$("input[name='email']").val();
         var bdate=$("input[name='bdate']").val();
         var edu=$("input[name='edu']").val();
+        var idn=$("input[name='idn']").val();
         var region=$("input[name='region']").val();
+        var company=$("input[name='company']").val();
         var tips=$("textarea[name='tips']").val();
-        var gender=$("input[name='gender']:checked").val();
-        var id=$("input[name='id']").val();
+        var url=$("input[name='url']").val();
+        var managerid=1;
+        var manager='李文';
+
+
         if(name==""||idn==""||phone==""||email==""||company==""||bdate=="")
         {
             layer.msg('联系人基本信息不能为空！',{icon:5,time:2000});return false;
@@ -226,9 +261,9 @@
             }
             //发送 ajax请求
             $.ajax({
-                url: "/edit1",
+                url: "/contactUpdate",
                 type: "post",
-                data:{"id":id,"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
+                data:{"id":id,"name":name,"gender":gender,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"tips":tips,"url":url,"managerid":managerid,"manager":manager},
                 dataType: "json",//返回的数据类型
                 success: function (data) {
                     //如果注册成功就跳转到登录页面

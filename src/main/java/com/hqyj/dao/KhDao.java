@@ -18,6 +18,7 @@ public interface KhDao {
     @Select("select * from kh where id=#{id}")
     List<kh> findById(kh kh);
 
+
     //根据姓名查询
     @Select("select * from kh where name=#{name}")
     List<kh> findByName(kh kh);

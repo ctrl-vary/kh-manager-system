@@ -14,7 +14,7 @@ public interface KhSatisfactionService {
     //根据经理id获取客服记录
     List<KhSatisfaction> getSatisfactionByJlId(Integer jlId);
     void delete(Integer sId);
-    void insert(KhSatisfaction khSatisfaction);
-    void update(KhSatisfaction khSatisfaction);
+    String insert(KhSatisfaction khSatisfaction);
+    String update(KhSatisfaction khSatisfaction);
     KhSatisfaction getSatisfactionBysId(Integer sId);
 }

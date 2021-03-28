@@ -43,7 +43,7 @@ public class KhServicelmpl implements KhService {
     JavaMailSender javaMailSender;
 
     @Override
-    public String add(com.hqyj.pojo.kh kh) {
+    public String add(kh kh) {
         int n = khDao.addKh(kh);
         if(n>0){
             return "添加成功";
@@ -364,4 +364,13 @@ public class KhServicelmpl implements KhService {
         }
         return "修改失败";
     }
+
+    @Override
+    public HashMap<String, Object> khUpdate(kh kh) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        kh kh1 = khDao.selectById(kh);
+        return null;
+    }
 }
+
+

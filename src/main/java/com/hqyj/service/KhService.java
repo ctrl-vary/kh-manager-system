@@ -37,4 +37,6 @@ public interface KhService {
     List<kh> getKhByJl(Integer jlId);
     String updateLinkMan(kh kh);
 
+    HashMap<String,Object> khUpdate(kh kh);
+
 }

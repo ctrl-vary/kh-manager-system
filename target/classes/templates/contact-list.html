@@ -146,8 +146,9 @@
         function update(obj) {
             //获取当前选中行得userId值
             var id=$(obj).parent().parent().find("td").eq(1).text();
+            console.log("id=" +id+"tyeofid"+typeof (id));
             //打开弹窗
-            x_admin_show("修改","/contact-edit?id=",360,360)
+            x_admin_show("修改","/contact-edit?id="+id,360,360)
         }
 
         /*-删除*/

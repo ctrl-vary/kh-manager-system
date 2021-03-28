@@ -35,55 +35,40 @@
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-tab-title">
                 <li class="layui-this">服务记录基本信息</li>
-                <li>其他信息</li>
             </ul>
 
             <div class="layui-tab-content" >
                 <div class="layui-tab-item layui-show">
-                    <!--                    <form class="layui-form layui-form-pane" action="" id="add">-->
 
-                    <!--                    <div class="layui-form-item">-->
-                    <!--                        <label class="layui-form-label">-->
-                    <!--                            <span class='x-red'>*</span>上级栏目-->
-                    <!--                        </label>-->
-                    <!--                        <div class="layui-input-block">-->
-                    <!--                            <select name="pid" id="pid">-->
-
-                    <!--                                <option value="0" selected="selected">顶级栏目</option>-->
-                    <!--                                <option value="0">文章</option>-->
-
-                    <!--                            </select>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                     <div class="layui-form-item">
                         <label class="layui-form-label">
                             <span class='x-red'>*</span>服务类型
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" autocomplete="off" placeholder="控制在10个汉字，20个字符以内"
+                            <input type="text" name="type" autocomplete="off" placeholder=""
                                    class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            <span class='x-red'>*</span>性别
-                        </label>
-                        <div class="layui-input-block" >
-                            <input type="radio" name="gender" value="男" title="男" checked="checked">
-                            <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon layui-anim-scaleSpring"></i>
-                                <div  style="font-size: 14px">男</div>
-                            </div>
-                            <input type="radio" name="gender" value="女" title="女">
-                            <div class="layui-unselect layui-form-radio"  style="font-size: 14px"><i class="layui-anim layui-icon"></i>
-                                <div>女</div>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">-->
+<!--                            <span class='x-red'>*</span>性别-->
+<!--                        </label>-->
+<!--                        <div class="layui-input-block" >-->
+<!--                            <input type="radio" name="gender" value="男" title="男" checked="checked">-->
+<!--                            <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon layui-anim-scaleSpring"></i>-->
+<!--                                <div  style="font-size: 14px">男</div>-->
+<!--                            </div>-->
+<!--                            <input type="radio" name="gender" value="女" title="女">-->
+<!--                            <div class="layui-unselect layui-form-radio"  style="font-size: 14px"><i class="layui-anim layui-icon"></i>-->
+<!--                                <div>女</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="layui-form-item">
                         <label class="layui-form-label"><span class='x-red'>*</span>服务日期</label>
                         <div class="layui-input-inline">
-                            <input class="layui-input" placeholder="请选择" id="bdate" name="bdate">
+                            <input type="date" class="layui-input" placeholder="" id="time" name="time">
                         </div>
                     </div>
 
@@ -92,27 +77,27 @@
                             <span class='x-red'>*</span>客户名称
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" name="phone" value="" autocomplete="off"
+                            <input type="text" name="khName" value="" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            <span class='x-red'>*</span>联系人
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="email" value="" autocomplete="off" placeholder=""
-                                   class="layui-input">
-                        </div>
-                    </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">-->
+<!--                            <span class='x-red'>*</span>联系人-->
+<!--                        </label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="text" name="email" value="" autocomplete="off" placeholder=""-->
+<!--                                   class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">
                             <span class='x-red'>*</span>预估成本
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" name="company" value="" autocomplete="off"
+                            <input type="text" name="cost" value="" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
@@ -122,7 +107,7 @@
                             <span class='x-red'>*</span>内容描述
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" name="managerid" value="" autocomplete="off" placeholder="控制在20个字、40个字节以内"
+                            <input type="text" name="des" value="" autocomplete="off" placeholder="控制在20个字、40个字节以内"
                                    class="layui-input">
                         </div>
                     </div>
@@ -162,83 +147,10 @@
                     <!--                        </button>-->
                     <!--                    </div>-->
                     <!--</form>-->
-                    <div style="height:100px;"></div>
-                </div>
-
-                <div class="layui-tab-item">
-
-                    <div class="layui-form-item">
-                        <input type="hidden" name="url" class="image" id="url">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label ">照片:</label>
-                            <div class="layui-upload">
-                                <button type="button" class="layui-btn" id="test1">上传头像</button>
-                                <div class="layui-upload-list" style="margin-left: 100px">
-                                    <img class="layui-upload-img" id="demo1" width="120" height="120"style="margin-top: 16px;margin-left: 12px">
-                                    <p id="demoText"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--                            <button type="button"class="layui-btn"onclick="saveHead()">确定</button>-->
-
-                        <!--                        <label for="link" class="layui-form-label">-->
-                        <!--                            客户照片-->
-                        <!--                        </label>-->
-                        <!--                        <div class="layui-input-inline">-->
-                        <!--                            <div class="site-demo-upbar">-->
-                        <!--                                <div class=" layui-upload-button" style="border:#FFFFFF ;">-->
-                        <!--                                    &lt;!&ndash;<form target="layui-upload-iframe" method="post" key="set-mine" enctype="multipart/form-data" action="">-->
-                        <!--                                        <input type="file" class="layui-upload-file"  id="previewImg" name="images" onchange="upload()">-->
-                        <!--                                    </form>-->
-                        <!--                                    <span class="layui-upload-icon"><i class="layui-icon"></i>上传图片</span>&ndash;&gt;-->
-                        <!--                                    <button type="button" class="layui-btn" id="test1">-->
-                        <!--                                        <i class="layui-icon">&#xe67c;</i>上传图片-->
-                        <!--                                    </button>-->
-                        <!--                                    <input class="layui-upload" type="file" accept="undefined" id="url" name="url" onchange="upload()">-->
-                        <!--                                </div>-->
-
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                        <!--                        <a href="javascript:;" style="" class="layui-btn " id="cancel"><i class="layui-icon">ဂ</i>撤销上传</a>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="layui-form-item imgs" id="imgshow">-->
-                        <!--                        <label  class="layui-form-label">栏目缩略图展示-->
-                        <!--                        </label>-->
-
-                        <!--                        <img src="" id="pimages" name="pimages" style="width: 400px;height: 200px;"/>-->
-                        <!--                        <input id="avatar"   name="image" required="" type="hidden">-->
-                    </div>
-                    <!--                      <form class="layui-form layui-form-pane" action="" id="add">-->
+<!--                    <div style="height:100px;"></div>-->
+<!--                </div>-->
 
 
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            所属地区
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="region" autocomplete="off" placeholder="控制在20个字、40个字节以内"
-                                   class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            学历
-                        </label>
-                        <div class="layui-input-block">
-                            <input type="text" name="edu" autocomplete="off" placeholder="控制在20个字、40个字节以内"
-                                   class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">
-                            备注
-                        </label>
-                        <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" name="tips" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
 
                     <div class="layui-form-item" style="width: 64px;height: 38px"  onclick="submit()" >
                         <button class="layui-btn"  type="button">
@@ -297,46 +209,63 @@
     <script>
         //按钮提交
         function submit() {
-            layer.msg("添加失败",{icon:5,time:2000});
+            // layer.msg("添加失败",{icon:5,time:2000});
+
+
             // form.on('submit(add)', function(data){
-            var name=$("input[name='name']").val();
-            var url=$("input[name='url']").val();
-            var idn=$("input[name='idn']").val();
-            var company=$("input[name='company']").val();
-            var managerid=$("input[name='managerid']").val();
-            var manager=$("input[name='manager']").val();
-            var phone=$("input[name='phone']").val();
-            var email=$("input[name='email']").val();
-            var bdate=$("input[name='bdate']").val();
-            var edu=$("input[name='region']").val();
-            var region=$("input[name='edu']").val();
-            var tips=$("textarea[name='tips']").val();
-            var gender=$("input[name='gender']:checked").val();
+            // var name=$("input[name='name']").val();
+            // var url=$("input[name='url']").val();
+            // var idn=$("input[name='idn']").val();
+            // var company=$("input[name='company']").val();
+            // var managerid=$("input[name='managerid']").val();
+            // var manager=$("input[name='manager']").val();
+            // var phone=$("input[name='phone']").val();
+            // var email=$("input[name='email']").val();
+            // var bdate=$("input[name='bdate']").val();
+            // var edu=$("input[name='region']").val();
+            // var region=$("input[name='edu']").val();
+            // var tips=$("textarea[name='tips']").val();
+            // var gender=$("input[name='gender']:checked").val();
             // var idn=$('#pid option:selected') .val();//所属栏目ID
 
 
-            if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+            var type=$("input[name='type']").val();
+            var time=$("input[name='time']").val();
+            var khName=$("input[name='khName']").val();
+            var cost=$("input[name='cost']").val();
+            var des=$("input[name='des']").val();
+            var satisfaction=$("input[name='manyi']:checked").val();
+
+            var khId = 1;
+            var jlId = 1;
+            var linkMan = "李文";
+
+
+
+
+            // if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+            if(type==""||time==""||khName==""||cost==""||des==""||satisfaction=="")
             {
                 layer.msg('客户基本信息不能为空！',{icon:5,time:2000});return false;
             }
 
-            else{
-                if(url==""){
-                    url="/";
-                }
-                if(edu==""){
-                    edu="/";
-                }
-                if(tips==""){
-                    tips="/";
-                }
-                if(region==""){
-                    region="/";
-                }
+            // else{
+            //     if(url==""){
+            //         url="/";
+            //     }
+            //     if(edu==""){
+            //         edu="/";
+            //     }
+            //     if(tips==""){
+            //         tips="/";
+            //     }
+            //     if(region==""){
+            //         region="/";
+            //     }
                 $.ajax({
                     type:"post",
-                    url:"/addKh",
-                    data:{"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
+                    url:"/insertKhSatisfaction",
+                    data:{"type":type,"time":time,"khName":khName,"cost":cost,"des":des,"satisfaction":satisfaction,"khId":khId,"jlId":jlId,"linkMan":linkMan},
                     dataType:"json",
                     success:function(data)
                     {
@@ -356,7 +285,8 @@
                         }
                     }
 
-                });}
+                });
+        // }
         }
 
         //加载文件上传组件

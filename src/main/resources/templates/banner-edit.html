@@ -19,140 +19,88 @@
 <div class="x-body" >
     <form class="layui-form" method="post" enctype="multipart/form-data">
         <div class="layui-form-item">
-            <label for="name" class="layui-form-label">
-                <span class="x-red">*</span>客户姓名
+            <label for="khId" class="layui-form-label">
+                <span class="x-red">*</span>编号
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="name" name="name" required="" lay-verify="required" th:value="${kh.name}"
+                <input type="text" id="khId" name="id" required="" lay-verify="required" th:value="${kh.id}"
+                       autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label for="type" class="layui-form-label">
+                <span class="x-red">*</span>服务类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="type" th:value="${kh.type}" name="type" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
+            <label for="time" class="layui-form-label">
+                <span class="x-red">*</span>服务日期
+            </label>
+            <div class="layui-input-inline">
+                <input type="date" id="time" th:value="${kh.time}" name="time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="khName" class="layui-form-label">
+                <span class="x-red">*</span>客户名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="khName" name="khName" required="" lay-verify="required" th:value="${kh.khName}"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class='x-red'>*</span>预估成本</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="请输入成本" id="cost" name="cost" th:value="${kh.cost}" lay-verify="required">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="des" class="layui-form-label">
+                <span class="x-red">*</span>内容描述
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="des" name="des" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" th:value="${kh.des}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">
-                <span class='x-red'>*</span>性别
+                <span class='x-red'>*</span>客户满意度
             </label>
             <div class="layui-input-block" >
-                <input type="radio" name="gender" value="男" title="男" id="m">
+                <input type="radio" name="manyi" value="很满意" title="很满意" id="m1">
                 <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon layui-anim-scaleSpring"></i>
-                    <div  style="font-size: 14px">男</div>
+                    <div  style="font-size: 14px">很满意</div>
                 </div>
-                <input type="radio" name="gender" value="女" title="女" id="w">
+                <input type="radio" name="manyi" value="比较满意" title="比较满意"id="m2">
                 <div class="layui-unselect layui-form-radio"  style="font-size: 14px"><i class="layui-anim layui-icon"></i>
-                    <div>女</div>
+                    <div>比较满意</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="idn" class="layui-form-label">
-                <span class="x-red">*</span>身份证号码
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="idn" th:value="${kh.idn}" name="idn" required="" lay-verify="identity"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="phone" class="layui-form-label">
-                <span class="x-red">*</span>联系电话
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="phone" th:value="${kh.phone}" name="phone" required="" lay-verify="phone"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="email" class="layui-form-label">
-                <span class="x-red">*</span>邮箱地址
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="email" name="email" required="" lay-verify="email" th:value="${kh.email}"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label"><span class='x-red'>*</span>出生日期</label>
-            <div class="layui-input-inline">
-                <input class="layui-input" placeholder="请选择" id="bdate" name="bdate" th:value="${kh.bdate}" lay-verify="date">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="company" class="layui-form-label">
-                <span class="x-red">*</span>客户单位
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="company" name="company" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input" th:value="${kh.company}">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="managerid" class="layui-form-label">
-                <span class="x-red">*</span>经理编号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="managerid" name="managerid" required="" lay-verify="number"
-                       autocomplete="off" class="layui-input" th:value="${kh.managerid}">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="manager" class="layui-form-label">
-                <span class="x-red">*</span>经理姓名
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="manager" name="manager" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input" th:value="${kh.manager}">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <input type="hidden" name="url" class="image" id="url">
-            <div class="layui-form-item">
-                <label class="layui-form-label ">照片:</label>
-                <div class="layui-upload">
-                    <button type="button" class="layui-btn" id="test1">修改头像</button>
-                    <div class="layui-upload-list" style="margin-left: 100px">
-                        <img class="layui-upload-img" th:src="${kh.url}" id="demo1" width="120" height="120"style="margin-top: 16px;margin-left: 12px">
-                        <p id="demoText"></p>
-                    </div>
+                <input type="radio" name="manyi" value="不满意" title="不满意"id="m3" >
+                <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon layui-anim-scaleSpring"></i>
+                    <div  style="font-size: 14px">不满意</div>
                 </div>
+                <input type="radio" name="manyi" value="很不满意" title="很不满意"id="m4">
+                <div class="layui-unselect layui-form-radio"  style="font-size: 14px"><i class="layui-anim layui-icon"></i>
+                    <div>很不满意</div>
+                </div>
+
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label for="edu" class="layui-form-label">
-                所属地区
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="region" name="region" required="" lay-verify=""
-                       autocomplete="off" class="layui-input" th:value="${kh.region}">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="edu" class="layui-form-label">
-                学历
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="edu" name="edu" required="" lay-verify=""
-                       autocomplete="off" class="layui-input" th:value="${kh.edu}">
-            </div>
-        </div>
-
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">
-                备注
-            </label>
-            <div class="layui-input-block">
-                <textarea  th:value="${kh.tips}" name="tips" class="layui-textarea"></textarea>
-            </div>
-        </div>
 
 
         <div class="layui-form-item" style="width: 64px;height: 38px"  onclick="update()" >
@@ -160,10 +108,9 @@
                 修改
             </button>
         </div>
+        <input type="hidden" name="satisfaction" id="satisfaction"  th:value="${kh.satisfaction}">
 
 
-        <input type="hidden" name="id" id="id"  th:value="${kh.id}">
-        <input type="hidden" name="gender" id="gender"  th:value="${kh.gender}">
 
 
     </form>
@@ -196,13 +143,20 @@
         }
     });
     $(document).ready(function () {
-        var m=document.getElementById("m");
-        var w=document.getElementById("w");
-        var gender=document.getElementById("gender").value;
-        if(gender=="男"){
-            m.checked='checked';
+        var m1=document.getElementById("m1");
+        var m2=document.getElementById("m2");
+        var m3=document.getElementById("m3");
+        var m4=document.getElementById("m4");
+        var satisfaction=document.getElementById("satisfaction").value;
+        if(satisfaction=="很满意"){
+            m1.checked='checked';
+        }else if(satisfaction=="比较满意"){
+            m2.checked='checked';
+        }
+        else if(satisfaction=="不满意"){
+            m3.checked='checked';
         }else {
-            w.checked='checked';
+            m4.checked='checked';
         }
     })
 
@@ -211,42 +165,52 @@
     //     console.log(data);
     function update() {
 
-        var name=$("input[name='name']").val();
-        var url=$("input[name='url']").val();
-        var idn=$("input[name='idn']").val();
-        var company=$("input[name='company']").val();
-        var managerid=$("input[name='managerid']").val();
-        var manager=$("input[name='manager']").val();
-        var phone=$("input[name='phone']").val();
-        var email=$("input[name='email']").val();
-        var bdate=$("input[name='bdate']").val();
-        var edu=$("input[name='edu']").val();
-        var region=$("input[name='region']").val();
-        var tips=$("textarea[name='tips']").val();
-        var gender=$("input[name='gender']:checked").val();
+        // var name=$("input[name='name']").val();
+        // var url=$("input[name='url']").val();
+        // var idn=$("input[name='idn']").val();
+        // var company=$("input[name='company']").val();
+        // var managerid=$("input[name='managerid']").val();
+        // var manager=$("input[name='manager']").val();
+        // var phone=$("input[name='phone']").val();
+        // var email=$("input[name='email']").val();
+        // var bdate=$("input[name='bdate']").val();
+        // var edu=$("input[name='edu']").val();
+        // var region=$("input[name='region']").val();
+        // var tips=$("textarea[name='tips']").val();
+        // var gender=$("input[name='gender']:checked").val();
+
+        var type=$("input[name='type']").val();
+        var time=$("input[name='time']").val();
+        var khName=$("input[name='khName']").val();
+        var cost=$("input[name='cost']").val();
+        var des=$("input[name='des']").val();
+        var satisfaction=$("input[name='manyi']:checked").val();
+
+
+
         var id=$("input[name='id']").val();
-        if(name==""||idn==""||phone==""||email==""||company==""||managerid==""||manager==""||bdate=="")
+        if(type==""||time==""||khName==""||cost==""||des==""||satisfaction=="")
         {
             layer.msg('客户基本信息不能为空！',{icon:5,time:2000});return false;
         }
-        else{
-            if(url==""){
-                url="/";
-            }
-            if(edu==""){
-                edu="/";
-            }
-            if(tips==""){
-                tips="/";
-            }
-            if(region==""){
-                region="/";
-            }
+        // else{
+        //     if(url==""){
+        //         url="/";
+        //     }
+        //     if(edu==""){
+        //         edu="/";
+        //     }
+        //     if(tips==""){
+        //         tips="/";
+        //     }
+        //     if(region==""){
+        //         region="/";
+        //     }
             //发送 ajax请求
             $.ajax({
-                url: "/edit",
+                url: "/updateKhSatisfaction",
                 type: "post",
-                data:{"id":id,"name":name,"gender":gender,"url":url,"phone":phone,"email":email,"bdate":bdate,"edu":edu,"idn":idn,"region":region,"company":company,"managerid":managerid,"manager":manager,"tips":tips},
+                data:{"id":id,"type":type,"time":time,"khName":khName,"cost":cost,"des":des,"satisfaction":satisfaction},
                 dataType: "json",//返回的数据类型
                 success: function (data) {
                     //如果注册成功就跳转到登录页面
@@ -271,7 +235,8 @@
                 }
             })
 
-        }}
+        // }
+    }
 
 
 
