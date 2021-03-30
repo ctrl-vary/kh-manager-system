@@ -156,7 +156,7 @@ public class KhController {
     public HashMap<String,Object> addLinkMan(kh kh){
         HashMap<String,Object> map=new HashMap<String,Object>();
         khService.add(kh);
-        String info="添加成功";
+        //String info="添加成功";
         String info=khService.del(kh);
         map.put("info",info);
         return map;

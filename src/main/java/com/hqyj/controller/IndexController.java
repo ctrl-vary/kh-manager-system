@@ -1,10 +1,13 @@
 package com.hqyj.controller;
 
+import com.hqyj.pojo.KhSer;
 import com.hqyj.pojo.UserInfo;
+import com.hqyj.service.KhserService;
 import com.hqyj.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,9 @@ import java.util.UUID;
 public class IndexController {
     @Autowired
     UserInfoService userInfoService;
+
+    @Autowired
+    KhserService khserService;
 
     //获取图片上传的路径
     @Value("${file.address}")
@@ -54,6 +60,14 @@ public class IndexController {
     }
 
 
+    @RequestMapping("/banner-time")
+    public String bannertime(KhSer khSer, ModelMap m){
+        HashMap<String, Object> map= khserService.select(khSer);
+        //把数据传到前端
+        m.put("info",map);
+        //将查询条件回显
+        return "banner-time";
+    }
 
     //访问 客户地区统计页面
     @RequestMapping("/regionTj")
